@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
+import Login from "../pages/Auth/Login";
+import Signup from "../pages/Auth/Signup";
 
 const router = createBrowserRouter([
 	{
@@ -20,16 +22,16 @@ const router = createBrowserRouter([
                 element: <div>Browse Tasks</div>
             },
             {
-                path: "my-posted-tasks",
+                path: "/my-posted-tasks",
                 element: <div>My Posted Tasks</div>
             },
             {
-                path: "login",
-                element: <div>Login</div>
+                path: "/login",
+                Component: Login,
             },
             {
-                path: "signup",
-                element: <div>Signup</div>
+                path: "/signup",
+                Component: Signup,
             }
         ]
 	},

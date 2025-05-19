@@ -59,8 +59,9 @@ const Navbar = () => {
 			<div className='navbar-center hidden lg:flex'>
 				<ul className='menu menu-horizontal px-1'>{links}</ul>
 			</div>
-			<div className='navbar-end'>
-				<a className='btn btn-primary'>Button</a>
+			<div className='navbar-end space-x-2'>
+				<Link to="/login" className="btn btn-primary">Login</Link>
+				<Link to="/signup" className="btn btn-primary btn-outline">Sign In</Link>
 			</div>
 		</div>
 	);
