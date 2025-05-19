@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+
+
+/* Custom CSS */
+
+a.active {
+    @apply text-primary underline;
+}
