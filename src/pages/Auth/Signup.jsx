@@ -1,3 +1,4 @@
+import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router";
 
 const Signup = () => {
@@ -46,6 +47,10 @@ const Signup = () => {
 					</div>
 					<button className='btn btn-neutral mt-4'>Sign Up</button>
 				</form>
+                <div className="divider">OR</div>
+                <div>
+                    <button className="btn btn-neutral btn-outline w-full"> <FaGoogle /> Sign Up with Google</button>
+                </div>
 			</div>
 		</div>
 	);
