@@ -1,3 +1,4 @@
+import { CgGoogleTasks } from "react-icons/cg";
 import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
@@ -24,7 +25,7 @@ const Navbar = () => {
 					<div
 						tabIndex={0}
 						role='button'
-						className='btn btn-ghost lg:hidden'
+						className='btn lg:hidden'
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -51,9 +52,12 @@ const Navbar = () => {
 				</div>
 				<Link
 					to='/'
-					className='btn btn-ghost text-xl'
+					className='text-xl flex gap-1 items-center'
 				>
-					Taskero
+					{/* Logo */}
+					<CgGoogleTasks />
+					{/* Name */}
+					<span className="font-bold">Taskero</span>
 				</Link>
 			</div>
 			<div className='navbar-center hidden lg:flex'>
@@ -99,7 +103,7 @@ const Navbar = () => {
 					to='/signup'
 					className='btn btn-primary btn-outline'
 				>
-					Sign In
+					Sign Up
 				</Link>
 			</div>
 		</div>

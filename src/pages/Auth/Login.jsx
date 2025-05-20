@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router";
+import SiteTitle from "../../components/SiteTitle";
 
 const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	return (
 		<div className='card bg-base-100 max-w-sm mx-auto shrink-0 shadow-2xl my-12'>
+			<SiteTitle>Login</SiteTitle>
 			<div className='card-body'>
 				<h1 className='text-4xl font-bold my-4 text-center'>Login Now</h1>
 				<form className='fieldset'>
