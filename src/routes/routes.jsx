@@ -6,6 +6,8 @@ import Signup from "../pages/Auth/Signup";
 import NotFound from "../pages/NotFound";
 import PrivateRoute from "../context/PrivateRoute";
 import AddTask from "../pages/Tasks/AddTasks";
+import BrowseTasks from "../pages/Tasks/BrowseTasks";
+import Loader from "../components/Loader";
 
 const router = createBrowserRouter([
 	{
@@ -27,7 +29,9 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/browse-tasks",
-				element: <div>Browse Tasks</div>,
+				loader: () => fetch("http://localhost:5000/tasks"),
+				Component: BrowseTasks,
+				hydrateFallbackElement: <Loader />,
 			},
 			{
 				path: "/my-posted-tasks",
