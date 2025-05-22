@@ -5,7 +5,7 @@ import { NavLink } from "react-router";
 const Footer = () => {
 	return (
 		<footer className='max-w-7xl mx-auto text-base-content px-4 pt-20 pb-12 mt-8'>
-			<div className='container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8'>
+			<div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
 				{/* Website Info */}
 				<div data-aos='fade-down'>
 					<h3 className='text-3xl font-bold flex items-center gap-2'>

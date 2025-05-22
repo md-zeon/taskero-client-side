@@ -5,6 +5,7 @@ import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
 import NotFound from "../pages/NotFound";
 import PrivateRoute from "../context/PrivateRoute";
+import AddTask from "../pages/Tasks/AddTasks";
 
 const router = createBrowserRouter([
 	{
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
 				path: "/add-task",
 				element: (
 					<PrivateRoute>
-						<div>Add Task</div>
+						<AddTask />
 					</PrivateRoute>
 				),
 			},
