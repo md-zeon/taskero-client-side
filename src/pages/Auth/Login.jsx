@@ -1,6 +1,6 @@
 import { use, useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SiteTitle from "../../components/SiteTitle";
 import AuthContext from "../../context/AuthContext";
 import { toast } from "react-toastify";
@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const { signIn, signInWithGoogle } = use(AuthContext);
+	const location = useLocation();
+	const navigate = useNavigate();
 
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -19,8 +21,9 @@ const Login = () => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
-				toast.success("Login successful!");
+				toast.success(`Login successful! Welcome ${user.displayName}`);
 				form.reset();
+				navigate(location?.state || "/");
 			})
 			.catch((error) => {
 				console.log(error);
@@ -33,7 +36,8 @@ const Login = () => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
-				toast.success("Login successful!");
+				toast.success(`Login successful! Welcome ${user.displayName}`);
+				navigate(location?.state || "/");
 			})
 			.catch((error) => {
 				console.log(error);
@@ -59,6 +63,7 @@ const Login = () => {
 						name='email'
 						className='input'
 						placeholder='Email'
+						autoComplete='email'
 						required
 					/>
 					<div className='relative'>
@@ -68,6 +73,7 @@ const Login = () => {
 							name='password'
 							className='input'
 							placeholder='Password'
+							autoComplete='current-password'
 							required
 						/>
 						<span

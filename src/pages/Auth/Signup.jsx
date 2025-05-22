@@ -1,6 +1,6 @@
 import { use, useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SiteTitle from "../../components/SiteTitle";
 import AuthContext from "../../context/AuthContext";
 import { toast } from "react-toastify";
@@ -8,12 +8,14 @@ import { toast } from "react-toastify";
 const Signup = () => {
 	const { createUser, updateUserProfile, signInWithGoogle } = use(AuthContext);
 	const [showPassword, setShowPassword] = useState(false);
+	const location = useLocation();
+	const navigate = useNavigate();
 	const handleGoogleSignIn = () => {
 		signInWithGoogle()
-		.then((res) => {
+			.then((res) => {
 				console.log(res.user);
-				// toast.success("Login successful!");
 				toast.success(`Welcome ${res.user.displayName}`);
+				navigate(location?.state || "/");
 			})
 			.catch((err) => {
 				toast.error(err.message);
@@ -45,6 +47,8 @@ const Signup = () => {
 				updateUserProfile(name, photoURL)
 					.then(() => {
 						toast.success("User created successfully");
+						form.reset();
+						navigate(location?.state || "/");
 					})
 					.catch((err) => {
 						const errorMessage = err.message;
@@ -57,7 +61,10 @@ const Signup = () => {
 	};
 
 	return (
-		<div className='card bg-base-100 max-w-sm mx-auto shrink-0 shadow-2xl my-12' data-aos="fade-up">
+		<div
+			className='card bg-base-100 max-w-sm mx-auto shrink-0 shadow-2xl my-12'
+			data-aos='fade-up'
+		>
 			<SiteTitle>Sign Up</SiteTitle>
 			<div className='card-body'>
 				<h1 className='text-4xl font-bold my-4 text-center'>Sign Up Now</h1>
@@ -80,6 +87,7 @@ const Signup = () => {
 						name='email'
 						className='input'
 						placeholder='Email'
+						autoComplete='email'
 						required
 					/>
 					<label className='label'>photoURL</label>
@@ -97,6 +105,7 @@ const Signup = () => {
 							name='password'
 							className='input'
 							placeholder='Password'
+							autoComplete='current-password'
 							required
 						/>
 						<span

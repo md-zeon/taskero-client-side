@@ -71,7 +71,7 @@ const Navbar = () => {
 					className='text-xl flex gap-1 items-center'
 				>
 					{/* Logo */}
-					<CgGoogleTasks />
+					<CgGoogleTasks className="animate-pulse" />
 					{/* Name */}
 					<span className='font-bold'>Taskero</span>
 				</Link>
