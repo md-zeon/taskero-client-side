@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router";
 import AuthContext from "../context/AuthContext";
 import ThemeController from "./ThemeController";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
 	const { user, logout } = use(AuthContext);
@@ -25,13 +26,29 @@ const Navbar = () => {
 	);
 
 	const handleLogout = () => {
-		logout()
-			.then(() => {
-				toast.success("Logout successful!");
-			})
-			.catch((error) => {
-				toast.error(error.message);
-			});
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You want to logout?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, logout!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				logout()
+					.then(() => {
+						Swal.fire({
+							title: "Logged out!",
+							text: "You have logged out successfully.",
+							icon: "success",
+						});
+					})
+					.catch((error) => {
+						toast.error(error.message);
+					});
+			}
+		});
 	};
 
 	return (
@@ -71,7 +88,7 @@ const Navbar = () => {
 					className='text-xl flex gap-1 items-center'
 				>
 					{/* Logo */}
-					<CgGoogleTasks className="animate-pulse" />
+					<CgGoogleTasks className='animate-pulse' />
 					{/* Name */}
 					<span className='font-bold'>Taskero</span>
 				</Link>
