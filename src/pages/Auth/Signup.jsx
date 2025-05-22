@@ -6,16 +6,26 @@ import AuthContext from "../../context/AuthContext";
 import { toast } from "react-toastify";
 
 const Signup = () => {
-	const { createUser, updateUserProfile } = use(AuthContext);
+	const { createUser, updateUserProfile, signInWithGoogle } = use(AuthContext);
 	const [showPassword, setShowPassword] = useState(false);
-	const handleSignUp = (event) => {
-		event.preventDefault();
-		const form = event.target;
+	const handleGoogleSignIn = () => {
+		signInWithGoogle()
+		.then((res) => {
+				console.log(res.user);
+				// toast.success("Login successful!");
+				toast.success(`Welcome ${res.user.displayName}`);
+			})
+			.catch((err) => {
+				toast.error(err.message);
+			});
+	};
+	const handleSignUp = (e) => {
+		e.preventDefault();
+		const form = e.target;
 		const name = form.name.value;
 		const email = form.email.value;
 		const password = form.password.value;
 		const photoURL = form.photoURL.value;
-		console.log(name, email, password, photoURL);
 
 		if (password.length < 6) {
 			toast.error("Password must be at least 6 characters");
@@ -111,7 +121,10 @@ const Signup = () => {
 				</form>
 				<div className='divider'>OR</div>
 				<div>
-					<button className='btn btn-neutral btn-outline w-full'>
+					<button
+						onClick={handleGoogleSignIn}
+						className='btn btn-neutral btn-outline w-full'
+					>
 						{" "}
 						<FaGoogle /> Sign Up with Google
 					</button>

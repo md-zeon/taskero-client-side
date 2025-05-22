@@ -3,9 +3,10 @@ import { CgGoogleTasks } from "react-icons/cg";
 import { Link, NavLink } from "react-router";
 import AuthContext from "../context/AuthContext";
 import ThemeController from "./ThemeController";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-	const { user } = use(AuthContext);
+	const { user, loading, logout } = use(AuthContext);
 	const links = (
 		<>
 			<li>
@@ -22,6 +23,17 @@ const Navbar = () => {
 			</li>
 		</>
 	);
+
+	const handleLogout = () => {
+		logout()
+			.then(() => {
+				toast.success("Logout successful!");
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			});
+	};
+
 	return (
 		<div className='navbar bg-base-100 shadow-sm'>
 			<div className='navbar-start'>
@@ -71,26 +83,31 @@ const Navbar = () => {
 				{/* Theme Controller */}
 				<ThemeController />
 				{/* User Profile */}
-				{user && (
+				{user && !loading && (
 					<div className='dropdown dropdown-end group'>
 						<div className='btn btn-ghost btn-circle avatar'>
 							<div className='w-8 rounded-full'>
 								<img
 									alt='Profile Picture'
-									src={user.photoURL || "https://img.icons8.com/fluency-systems-regular/48/user-male-circle--v1.png"}
+									src={user?.photoURL || "https://img.icons8.com/fluency-systems-regular/48/user-male-circle--v1.png"}
 								/>
 							</div>
 						</div>
 						<div className='card absolute right-5 top-14 bg-base-100 shadow hidden group-hover:flex'>
 							<div className='card-body px-5 py-3'>
-								<span className='font-bold text-lg'>{user.displayName}</span>
+								<span className='font-bold text-lg'>{user?.displayName}</span>
 							</div>
 						</div>
 					</div>
 				)}
 
 				{user ? (
-					<button className="btn btn-primary">Logout</button>
+					<button
+						onClick={handleLogout}
+						className='btn btn-primary'
+					>
+						Logout
+					</button>
 				) : (
 					<>
 						{/* Login and Signup */}
