@@ -57,7 +57,7 @@ const Signup = () => {
 	};
 
 	return (
-		<div className='card bg-base-100 max-w-sm mx-auto shrink-0 shadow-2xl my-12'>
+		<div className='card bg-base-100 max-w-sm mx-auto shrink-0 shadow-2xl my-12' data-aos="fade-up">
 			<SiteTitle>Sign Up</SiteTitle>
 			<div className='card-body'>
 				<h1 className='text-4xl font-bold my-4 text-center'>Sign Up Now</h1>

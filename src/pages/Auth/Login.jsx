@@ -1,16 +1,58 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router";
 import SiteTitle from "../../components/SiteTitle";
+import AuthContext from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const { signIn, signInWithGoogle } = use(AuthContext);
+
+	const handleLogin = (e) => {
+		e.preventDefault();
+		const form = e.target;
+		const email = form.email.value;
+		const password = form.password.value;
+		console.log(email, password);
+		signIn(email, password)
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+				toast.success("Login successful!");
+				form.reset();
+			})
+			.catch((error) => {
+				console.log(error);
+				toast.error(error.message);
+			});
+	};
+
+	const handleGoogleLogin = () => {
+		signInWithGoogle()
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+				toast.success("Login successful!");
+			})
+			.catch((error) => {
+				console.log(error);
+				toast.error(error.message);
+			});
+	};
+
 	return (
-		<div className='card bg-base-100 max-w-sm mx-auto shrink-0 shadow-2xl my-12'>
+		<div
+			className='card bg-base-100 max-w-sm mx-auto shrink-0 shadow-2xl my-12'
+			data-aos='fade-up'
+		>
 			<SiteTitle>Login</SiteTitle>
 			<div className='card-body'>
 				<h1 className='text-4xl font-bold my-4 text-center'>Login Now</h1>
-				<form className='fieldset'>
+				<form
+					onSubmit={handleLogin}
+					className='fieldset'
+				>
 					<label className='label'>Email</label>
 					<input
 						type='email'
@@ -50,7 +92,10 @@ const Login = () => {
 				</form>
 				<div className='divider'>OR</div>
 				<div>
-					<button className='btn btn-neutral btn-outline w-full'>
+					<button
+						onClick={handleGoogleLogin}
+						className='btn btn-neutral btn-outline w-full'
+					>
 						{" "}
 						<FaGoogle /> Login with Google
 					</button>

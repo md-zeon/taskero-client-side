@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
-
-
-
+@import "aos/dist/aos.css";
 
 /* Custom CSS */
 

@@ -6,7 +6,7 @@ import ThemeController from "./ThemeController";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
-	const { user, loading, logout } = use(AuthContext);
+	const { user, logout } = use(AuthContext);
 	const links = (
 		<>
 			<li>
@@ -83,7 +83,7 @@ const Navbar = () => {
 				{/* Theme Controller */}
 				<ThemeController />
 				{/* User Profile */}
-				{user && !loading && (
+				{user && (
 					<div className='dropdown dropdown-end group'>
 						<div className='btn btn-ghost btn-circle avatar'>
 							<div className='w-8 rounded-full'>
