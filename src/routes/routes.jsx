@@ -20,7 +20,9 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "/",
+				loader: () => fetch("http://localhost:5000/tasks?limit=6&sort=deadline"),
 				Component: Home,
+				hydrateFallbackElement: <Loader />,
 			},
 			{
 				path: "/add-task",

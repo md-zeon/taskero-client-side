@@ -1,12 +1,21 @@
 import SiteTitle from "../../components/SiteTitle";
-
+import Banner from "./Banner";
+import FeaturedTasks from "./FeaturedTasks";
+import HowItWorks from "./HowItWorks";
+import FAQ from "./FAQ";
+import { useLoaderData } from "react-router";
 const Home = () => {
-    return (
-        <div>
-            <SiteTitle>Home</SiteTitle>
-            <h2>Home</h2>
-        </div>
-    );
+	const featuredTasks = useLoaderData();
+
+	return (
+		<div className='max-w-7xl mx-auto px-4'>
+			<SiteTitle>Home</SiteTitle>
+			<Banner />
+			<FeaturedTasks tasks={featuredTasks} />
+			<HowItWorks />
+			<FAQ />
+		</div>
+	);
 };
 
 export default Home;

@@ -1,12 +1,10 @@
 import { Link } from "react-router";
-import Navbar from "../components/Navbar";
 
 const NotFound = () => {
 	return (
-		<div className="max-w-7xl mx-auto">
-			<Navbar />
+		<div className='max-w-7xl mx-auto'>
 			<div
-				className='min-h-[calc(100vh-200px)] flex items-center justify-center'
+				className='min-h-screen flex items-center justify-center'
 				data-aos='fade-up'
 			>
 				<div className='text-center'>

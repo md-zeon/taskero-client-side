@@ -1,7 +1,7 @@
 const Loader = () => {
     return (
         <div className='min-h-screen flex justify-center items-center'>
-            <span className='loading loading-bars bg-primary'></span>
+            <span className='loading loading-bars loading-xl bg-primary'></span>
         </div>
     );
 };

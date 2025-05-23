@@ -101,7 +101,7 @@ const Navbar = () => {
 				<ThemeController />
 				{/* User Profile */}
 				{user && (
-					<div className='dropdown dropdown-end group'>
+					<div className='dropdown dropdown-end group z-50'>
 						<div className='btn btn-ghost btn-circle avatar'>
 							<div className='w-8 rounded-full'>
 								<img

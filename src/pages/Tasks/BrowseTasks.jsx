@@ -33,7 +33,7 @@ const BrowseTasks = () => {
 				className='flex flex-wrap justify-center gap-3 mb-8'
 				data-aos='fade-up'
 			>
-				{categories.map((cat) => (
+				{categories?.map((cat) => (
 					<button
 						key={cat}
 						className={`btn btn-sm ${category === cat ? "btn-primary" : "btn-outline"}`}
@@ -45,8 +45,8 @@ const BrowseTasks = () => {
 			</div>
 
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-				{filtered.length > 0 ? (
-					filtered.map((task) => (
+				{filtered?.length > 0 ? (
+					filtered?.map((task) => (
 						<div
 							key={task._id}
 							className='card bg-base-200 shadow-lg border border-base-300'
