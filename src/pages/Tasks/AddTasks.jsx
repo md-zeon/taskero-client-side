@@ -5,6 +5,7 @@ import AuthContext from "../../context/AuthContext";
 
 import { FaTasks, FaDollarSign, FaCalendarAlt, FaUser, FaEnvelope } from "react-icons/fa";
 import { MdTitle, MdCategory, MdDescription } from "react-icons/md";
+import SiteTitle from "../../components/SiteTitle";
 
 const AddTask = () => {
 	const { user } = use(AuthContext);
@@ -43,9 +44,10 @@ const AddTask = () => {
 
 	return (
 		<div
-			className='max-w-4xl mx-auto mt-16 p-8 bg-gradient-to-br from-base-200 to-base-100 rounded-2xl shadow-2xl border border-base-300'
-			data-aos='fade-up'
+		className='max-w-4xl mx-auto mt-16 p-8 bg-gradient-to-br from-base-200 to-base-100 rounded-2xl shadow-2xl border border-base-300'
+		data-aos='fade-up'
 		>
+			<SiteTitle>Add Task</SiteTitle>
 			<h2
 				className='text-3xl font-bold mb-8 text-center text-primary flex items-center justify-center gap-2'
 				data-aos='fade-down'

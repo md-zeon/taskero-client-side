@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import GoBack from "../../components/GoBack";
 import { use } from "react";
 import AuthContext from "../../context/AuthContext";
+import SiteTitle from "../../components/SiteTitle";
 
 const EditTask = () => {
 	const { id } = useParams();
@@ -60,6 +61,7 @@ const EditTask = () => {
 			className='max-w-3xl mx-auto mt-10 p-8 bg-base-200 rounded-2xl shadow-xl space-y-6'
 			data-aos='fade-up'
 		>
+			<SiteTitle>Update Task</SiteTitle>
 			<GoBack />
 			<h2 className='text-3xl font-bold text-center flex items-center justify-center gap-2 text-primary'>
 				<FaEdit /> Edit Task: <span className='italic text-gray-700'>{task.title}</span>

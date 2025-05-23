@@ -1,8 +1,10 @@
 import { Link } from "react-router";
+import SiteTitle from "../components/SiteTitle";
 
 const NotFound = () => {
 	return (
 		<div className='max-w-7xl mx-auto'>
+			<SiteTitle>404 - Page Not Found</SiteTitle>
 			<div
 				className='min-h-screen flex items-center justify-center'
 				data-aos='fade-up'

@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import AuthContext from "../../context/AuthContext";
 import Loader from "../../components/Loader";
 import Swal from "sweetalert2";
+import SiteTitle from "../../components/SiteTitle";
 
 const MyPostedTasks = () => {
 	const { user } = use(AuthContext);
@@ -69,6 +70,7 @@ const MyPostedTasks = () => {
 
 	return (
 		<div className='max-w-6xl mx-auto p-6 mt-10'>
+			<SiteTitle>My Posted Tasks</SiteTitle>
 			<h2 className='text-3xl font-bold mb-8 text-center'>My Posted Tasks</h2>
 
 			{tasks.length === 0 ? (

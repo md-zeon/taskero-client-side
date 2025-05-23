@@ -21,7 +21,7 @@ const BrowseTasks = () => {
 
 	return (
 		<div className='max-w-7xl mx-auto px-4 py-10'>
-            <SiteTitle>Browse Task</SiteTitle>
+            <SiteTitle>Browse Tasks</SiteTitle>
 			<h2
 				className='text-3xl font-bold text-center text-primary mb-8 flex items-center justify-center gap-2'
 				data-aos='fade-down'
