@@ -42,7 +42,11 @@ const Item = ({ title, children }) => {
 
 const FAQ = () => {
 	return (
-		<div className='px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20'>
+		<div
+			data-aos='fade-up'
+			data-aos-delay='200'
+			className='px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20'
+		>
 			<div className='max-w-xl sm:mx-auto lg:max-w-2xl'>
 				<div className='flex flex-col mb-16 sm:text-center'>
 					<div className='flex items-center justify-center w-12 h-12 rounded-full border border-primary text-primary mb-6 mx-auto'>

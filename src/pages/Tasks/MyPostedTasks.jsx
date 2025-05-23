@@ -69,7 +69,7 @@ const MyPostedTasks = () => {
 	}
 
 	return (
-		<div className='max-w-6xl mx-auto p-6 mt-10'>
+		<div data-aos='fade-up' className='max-w-6xl mx-auto p-6 mt-10'>
 			<SiteTitle>My Posted Tasks</SiteTitle>
 			<h2 className='text-3xl font-bold mb-8 text-center'>My Posted Tasks</h2>
 

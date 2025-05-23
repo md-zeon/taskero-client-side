@@ -4,16 +4,15 @@ import Loader from "../components/Loader";
 import Footer from "../components/Footer";
 
 const MainLayout = () => {
-	const state = useNavigation();
+	const { state } = useNavigation();
+	console.log(state);
 	return (
 		<>
 			<header className='max-w-7xl mx-auto'>
 				<Navbar />
 			</header>
-			<main className='max-w-7xl mx-auto pb-10'>
-				{state === "loading" ? <Loader /> : <Outlet />}
-			</main>
-			<footer className="bg-base-200">
+			<main className='max-w-7xl mx-auto pb-10'>{state === "loading" ? <Loader /> : <Outlet />}</main>
+			<footer className='bg-base-200'>
 				<Footer />
 			</footer>
 		</>

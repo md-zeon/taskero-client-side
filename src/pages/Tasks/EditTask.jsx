@@ -14,7 +14,7 @@ const EditTask = () => {
 
 	if (task.userEmail !== user?.email) {
 		return (
-			<div className='flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]'>
+			<div data-aos='fade-up' className='flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]'>
 				<h1 className='text-2xl font-bold mb-4'>You are not authorized to edit this task.</h1>
 				<p className='text-lg mb-4'>You can only edit tasks that you have posted.</p>
 				<button
