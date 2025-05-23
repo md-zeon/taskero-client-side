@@ -10,12 +10,12 @@ import AOS from "aos";
 AOS.init({ duration: 1000 });
 
 createRoot(document.getElementById("root")).render(
-	<StrictMode>
+	<>
 		<AuthProvider>
 			<HelmetProvider>
 				<RouterProvider router={router} />
 			</HelmetProvider>
 		</AuthProvider>
 		<ToastContainer />
-	</StrictMode>,
+	</>,
 );

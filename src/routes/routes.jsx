@@ -9,6 +9,7 @@ import AddTask from "../pages/Tasks/AddTasks";
 import BrowseTasks from "../pages/Tasks/BrowseTasks";
 import Loader from "../components/Loader";
 import TaskDetails from "../pages/Tasks/TaskDetails";
+import MyPostedTasks from "../pages/Tasks/MyPostedTasks";
 
 const router = createBrowserRouter([
 	{
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
 				path: "/my-posted-tasks",
 				element: (
 					<PrivateRoute>
-						<div>My Posted Tasks</div>
+						<MyPostedTasks />
 					</PrivateRoute>
 				),
 			},
