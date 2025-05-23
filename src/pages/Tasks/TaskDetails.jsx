@@ -1,5 +1,4 @@
 import { FaUser, FaEnvelope, FaDollarSign, FaBriefcase, FaClock } from "react-icons/fa";
-import "aos/dist/aos.css";
 import { useLoaderData } from "react-router";
 import { toast } from "react-toastify";
 import SiteTitle from "../../components/SiteTitle";
@@ -12,7 +11,7 @@ const TaskDetails = () => {
 			className='max-w-3xl mx-auto bg-base-200 rounded-lg shadow-lg p-8 mt-10'
 			data-aos='fade-up'
 		>
-            <SiteTitle>{task.title}</SiteTitle>
+			<SiteTitle>{task.title}</SiteTitle>
 			<h2 className='text-3xl font-bold text-primary mb-4'>{task.title}</h2>
 
 			<div className='text-gray-600 space-y-2'>
@@ -41,7 +40,12 @@ const TaskDetails = () => {
 			</div>
 
 			<div className='mt-6'>
-				<button className='btn btn-primary' onClick={() => toast.success(`Applied to ${task.title} successfully`)}>Apply for Task</button>
+				<button
+					className='btn btn-primary'
+					onClick={() => toast.success(`Applied to ${task.title} successfully`)}
+				>
+					Apply for Task
+				</button>
 			</div>
 		</div>
 	);

@@ -10,6 +10,7 @@ import BrowseTasks from "../pages/Tasks/BrowseTasks";
 import Loader from "../components/Loader";
 import TaskDetails from "../pages/Tasks/TaskDetails";
 import MyPostedTasks from "../pages/Tasks/MyPostedTasks";
+import EditTask from "../pages/Tasks/EditTask";
 
 const router = createBrowserRouter([
 	{
@@ -38,7 +39,21 @@ const router = createBrowserRouter([
 			{
 				path: "/task/:id",
 				loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.id}`),
-				Component: TaskDetails,
+				element: (
+					<PrivateRoute>
+						<TaskDetails />
+					</PrivateRoute>
+				),
+				hydrateFallbackElement: <Loader />,
+			},
+			{
+				path: "/edit-task/:id",
+				element: (
+					<PrivateRoute>
+						<EditTask />
+					</PrivateRoute>
+				),
+				loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.id}`),
 				hydrateFallbackElement: <Loader />,
 			},
 			{

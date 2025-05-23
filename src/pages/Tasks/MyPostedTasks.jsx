@@ -1,5 +1,5 @@
 import { use, useEffect, useState } from "react";
-import { FaEdit, FaTrashAlt, FaClock, FaDollarSign } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaClock, FaDollarSign, FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 import { Link } from "react-router";
@@ -65,43 +65,60 @@ const MyPostedTasks = () => {
 	}
 
 	return (
-		<div className='max-w-5xl mx-auto p-6 mt-10'>
-			<h2 className='text-3xl font-bold mb-6 text-center'>My Posted Tasks</h2>
+		<div className='max-w-6xl mx-auto p-6 mt-10'>
+			<h2 className='text-3xl font-bold mb-8 text-center'>My Posted Tasks</h2>
 
 			{tasks.length === 0 ? (
 				<p className='text-center text-gray-500'>You haven't posted any tasks yet.</p>
 			) : (
-				<div className='grid md:grid-cols-2 gap-6'>
-					{tasks.map((task) => (
-						<div
-							key={task._id}
-							className='bg-base-200 rounded-lg p-5 shadow-lg space-y-2'
-							data-aos='fade-up'
-						>
-							<h3 className='text-xl font-semibold'>{task.title}</h3>
-							<p className='text-sm text-gray-500'>{task.category}</p>
-							<p className='flex items-center gap-2 text-sm'>
-								<FaClock /> Deadline:{" "}
-								<span className='font-medium'>{new Date(task.deadline).toLocaleDateString()}</span>
-							</p>
-							<p className='flex items-center gap-2 text-sm'>
-								<FaDollarSign /> Budget: ${task.budget}
-							</p>
-							<div className='flex gap-3 mt-4'>
-								<Link to={`/edit-task/${task._id}`}>
-									<button className='btn btn-sm btn-outline btn-info flex items-center gap-1'>
-										<FaEdit /> Edit
-									</button>
-								</Link>
-								<button
-									onClick={() => handleDelete(task._id)}
-									className='btn btn-sm btn-outline btn-error flex items-center gap-1'
-								>
-									<FaTrashAlt /> Delete
-								</button>
-							</div>
-						</div>
-					))}
+				<div className='overflow-x-auto'>
+					<table className='table table-zebra w-full text-sm'>
+						<thead className='bg-base-300 text-base-content'>
+							<tr>
+								<th>#</th>
+								<th>Title</th>
+								<th>Category</th>
+								<th>
+									<FaClock className='inline mr-1' /> Deadline
+								</th>
+								<th>
+									<FaDollarSign className='inline mr-1' /> Budget
+								</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{tasks.map((task, idx) => (
+								<tr key={task._id}>
+									<td>{idx + 1}</td>
+									<td className='font-semibold'>{task.title}</td>
+									<td>{task.category}</td>
+									<td>{new Date(task.deadline).toLocaleDateString()}</td>
+									<td>${task.budget}</td>
+									<td>
+										<div className='flex gap-2 flex-wrap'>
+											<Link to={`/edit-task/${task._id}`}>
+												<button className='btn btn-xs btn-outline btn-info flex items-center gap-1'>
+													<FaEdit /> Edit
+												</button>
+											</Link>
+											<button
+												onClick={() => handleDelete(task._id)}
+												className='btn btn-xs btn-outline btn-error flex items-center gap-1'
+											>
+												<FaTrashAlt /> Delete
+											</button>
+											<Link to={`/task/${task._id}/bids`}>
+												<button className='btn btn-xs btn-outline btn-primary flex items-center gap-1'>
+													<FaEye /> Bids
+												</button>
+											</Link>
+										</div>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
 				</div>
 			)}
 		</div>
