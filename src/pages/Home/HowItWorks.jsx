@@ -24,7 +24,7 @@ const steps = [
 const HowItWorks = () => {
 	return (
 		<section
-			className='py-14 px-4 md:px-10 bg-muted/10 rounded-2xl shadow-inner'
+			className='py-14 px-4 md:px-10 bg-muted/10 rounded-2xl'
 			data-aos='fade-up'
 			data-aos-delay='200'
 		>
@@ -33,12 +33,12 @@ const HowItWorks = () => {
 				{steps.map((step, idx) => (
 					<div
 						key={idx}
-						className='bg-white p-6 rounded-2xl shadow-md text-center transition-transform duration-300 hover:scale-105'
+						className='p-6 rounded-2xl text-center transition-transform duration-500 hover:scale-105 hover:shadow-md shadow-primary border border-primary'
 						data-aos='zoom-in'
 						data-aos-delay={step.delay}
 					>
 						<div className='mb-4 flex justify-center'>{step.icon}</div>
-						<h3 className='text-xl font-semibold mb-2 text-gray-800'>{step.title}</h3>
+						<h3 className='text-xl font-semibold mb-2 text-primary'>{step.title}</h3>
 						<p className='text-gray-600'>{step.description}</p>
 					</div>
 				))}

@@ -24,7 +24,7 @@ const Footer = () => {
 						<FaEnvelope /> support@taskero.com
 					</p>
 					<p className='flex items-center gap-2 mt-1'>
-						<FaPhoneAlt /> +1-800-123-4567
+						<FaPhoneAlt /> +880 1523-456789
 					</p>
 				</div>
 

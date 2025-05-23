@@ -11,6 +11,7 @@ import Loader from "../components/Loader";
 import TaskDetails from "../pages/Tasks/TaskDetails";
 import MyPostedTasks from "../pages/Tasks/MyPostedTasks";
 import EditTask from "../pages/Tasks/EditTask";
+import TermsAndConditions from "../pages/TermsAndConditions";
 
 const router = createBrowserRouter([
 	{
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
 			{
 				path: "/signup",
 				Component: Signup,
+			},
+			{
+				path: "/terms",
+				Component: TermsAndConditions,
 			},
 		],
 	},

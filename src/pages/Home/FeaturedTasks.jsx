@@ -4,7 +4,7 @@ import { FaBriefcase, FaClock, FaDollarSign, FaUser } from "react-icons/fa";
 const FeaturedTasks = ({ tasks }) => {
 	return (
 		<section
-			className='py-10'
+			className='py-10 my-12 rounded-2xl'
 			data-aos='fade-up'
 			data-aos-delay='100'
 		>
@@ -16,7 +16,7 @@ const FeaturedTasks = ({ tasks }) => {
 					tasks.map((task) => (
 						<div
 							key={task._id}
-							className='card bg-base-200 shadow-lg border border-base-300'
+							className='card bg-base-200 shadow-inner hover:shadow-primary border border-base-300'
 							data-aos='zoom-in'
 						>
 							<div className='card-body'>

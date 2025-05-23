@@ -5,10 +5,9 @@ import Footer from "../components/Footer";
 
 const MainLayout = () => {
 	const { state } = useNavigation();
-	console.log(state);
 	return (
 		<>
-			<header className='max-w-7xl mx-auto'>
+			<header className='max-w-7xl mx-auto sticky top-0 border-b border-b-primary z-50'>
 				<Navbar />
 			</header>
 			<main className='max-w-7xl mx-auto pb-10'>{state === "loading" ? <Loader /> : <Outlet />}</main>
