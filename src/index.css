@@ -1,9 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "daisyui" {
+	themes: winter --default, forest --prefersdark;
+}
 @import "aos/dist/aos.css";
 
 /* Custom CSS */
 
 a.active {
-    @apply text-primary underline;
+	@apply text-primary underline;
 }

@@ -10,7 +10,7 @@ const MainLayout = () => {
 			<header className='max-w-7xl mx-auto'>
 				<Navbar />
 			</header>
-			<main className='max-w-7xl mx-auto'>
+			<main className='max-w-7xl mx-auto pb-10'>
 				{state === "loading" ? <Loader /> : <Outlet />}
 			</main>
 			<footer className="bg-base-200">

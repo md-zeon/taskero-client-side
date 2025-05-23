@@ -4,10 +4,10 @@ import { NavLink } from "react-router";
 
 const Footer = () => {
 	return (
-		<footer className='max-w-7xl mx-auto text-base-content px-4 pt-20 pb-12 mt-8'>
+		<footer className='max-w-7xl mx-auto text-base-content px-4 py-12'>
 			<div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
 				{/* Website Info */}
-				<div data-aos='fade-down'>
+				<div>
 					<h3 className='text-3xl font-bold flex items-center gap-2'>
 						<CgGoogleTasks className='animate-pulse' /> Taskero
 					</h3>
@@ -18,10 +18,7 @@ const Footer = () => {
 				</div>
 
 				{/* Contact Info */}
-				<div
-					data-aos='fade-down'
-					data-aos-delay='200'
-				>
+				<div>
 					<h3 className='footer-title mb-2'>Contact Us</h3>
 					<p className='flex items-center gap-2'>
 						<FaEnvelope /> support@taskero.com
@@ -32,10 +29,7 @@ const Footer = () => {
 				</div>
 
 				{/* Useful Links */}
-				<div
-					data-aos='fade-down'
-					data-aos-delay='300'
-				>
+				<div>
 					<h3 className='footer-title mb-2'>Useful Links</h3>
 					<ul className='space-y-1'>
 						<li>
@@ -82,10 +76,7 @@ const Footer = () => {
 				</div>
 
 				{/* Social Media */}
-				<div
-					data-aos='fade-down'
-					data-aos-delay='400'
-				>
+				<div>
 					<h3 className='footer-title mb-2'>Follow Us</h3>
 					<div className='flex gap-4'>
 						<a

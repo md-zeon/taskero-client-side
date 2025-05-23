@@ -85,10 +85,10 @@ const Navbar = () => {
 				</div>
 				<Link
 					to='/'
-					className='text-xl flex gap-1 items-center'
+					className='text-2xl flex gap-1 items-center'
 				>
 					{/* Logo */}
-					<CgGoogleTasks className='animate-pulse' />
+					<CgGoogleTasks className='animate-pulse text-primary' />
 					{/* Name */}
 					<span className='font-bold'>Taskero</span>
 				</Link>

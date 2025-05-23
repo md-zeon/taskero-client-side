@@ -6,7 +6,7 @@ const ThemeController = () => {
 			<input
 				type='checkbox'
 				className='theme-controller'
-				value='dark'
+				value='forest'
 			/>
 
 			{/* sun icon */}
