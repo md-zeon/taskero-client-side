@@ -39,7 +39,7 @@ const EditTask = () => {
 			budget: parseFloat(form.budget.value),
 		};
 
-		fetch(`http://localhost:5000/tasks/${id}`, {
+		fetch(`https://taskero-server.vercel.app/tasks/${id}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(updatedTask),

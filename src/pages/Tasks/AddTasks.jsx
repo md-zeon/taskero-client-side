@@ -23,7 +23,7 @@ const AddTask = () => {
 			userEmail: user?.email,
 			userName: user?.displayName,
 		};
-		fetch("http://localhost:5000/tasks", {
+		fetch("https://taskero-server.vercel.app/tasks", {
 			method: "POST",
 			headers: { "content-type": "application/json" },
 			body: JSON.stringify(newTask),

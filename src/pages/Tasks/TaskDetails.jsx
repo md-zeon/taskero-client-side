@@ -10,7 +10,7 @@ const TaskDetails = () => {
 	const [bids, setBids] = useState(task.bidsCount || 0);
 
 	const handleBid = () => {
-		fetch(`http://localhost:5000/tasks/${id}/bids`, {
+		fetch(`https://taskero-server.vercel.app/tasks/${id}/bids`, {
 			method: "PATCH",
 			headers: {
 				"content-type": "application/json",

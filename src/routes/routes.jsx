@@ -21,7 +21,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "/",
-				loader: () => fetch("http://localhost:5000/tasks?limit=6&sort=deadline"),
+				loader: () => fetch("https://taskero-server.vercel.app/tasks?limit=6&sort=deadline"),
 				Component: Home,
 				hydrateFallbackElement: <Loader />,
 			},
@@ -35,13 +35,13 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/browse-tasks",
-				loader: () => fetch("http://localhost:5000/tasks"),
+				loader: () => fetch("https://taskero-server.vercel.app/tasks"),
 				Component: BrowseTasks,
 				hydrateFallbackElement: <Loader />,
 			},
 			{
 				path: "/task/:id",
-				loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.id}`),
+				loader: ({ params }) => fetch(`https://taskero-server.vercel.app/tasks/${params.id}`),
 				element: (
 					<PrivateRoute>
 						<TaskDetails />
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 						<EditTask />
 					</PrivateRoute>
 				),
-				loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.id}`),
+				loader: ({ params }) => fetch(`https://taskero-server.vercel.app/tasks/${params.id}`),
 				hydrateFallbackElement: <Loader />,
 			},
 			{
