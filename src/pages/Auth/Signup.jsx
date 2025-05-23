@@ -13,7 +13,7 @@ const Signup = () => {
 	const handleGoogleSignIn = () => {
 		signInWithGoogle()
 			.then((res) => {
-				console.log(res.user);
+				// console.log(res.user);
 				toast.success(`Welcome ${res.user.displayName}`);
 				navigate(location?.state || "/");
 			})
@@ -56,7 +56,7 @@ const Signup = () => {
 					});
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(err);
 			});
 	};
 
