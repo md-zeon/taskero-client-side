@@ -1,7 +1,6 @@
 import { use, useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt, FaClock, FaDollarSign, FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
-
 import { Link } from "react-router";
 import AuthContext from "../../context/AuthContext";
 import Loader from "../../components/Loader";
@@ -60,6 +59,10 @@ const MyPostedTasks = () => {
 		});
 	};
 
+	const handleBids = (task) => {
+		toast.info(`Total Bids: ${task?.bidsCount || 0}`);
+	};
+
 	if (loading) {
 		return <Loader />;
 	}
@@ -108,11 +111,12 @@ const MyPostedTasks = () => {
 											>
 												<FaTrashAlt /> Delete
 											</button>
-											<Link to={`/task/${task._id}/bids`}>
-												<button className='btn btn-xs btn-outline btn-primary flex items-center gap-1'>
-													<FaEye /> Bids
-												</button>
-											</Link>
+											<button
+												onClick={() => handleBids(task)}
+												className='btn btn-xs btn-outline btn-primary flex items-center gap-1'
+											>
+												<FaEye /> Bids
+											</button>
 										</div>
 									</td>
 								</tr>

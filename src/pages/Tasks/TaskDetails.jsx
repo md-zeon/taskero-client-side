@@ -1,10 +1,35 @@
 import { FaUser, FaEnvelope, FaDollarSign, FaBriefcase, FaClock } from "react-icons/fa";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useParams } from "react-router";
 import { toast } from "react-toastify";
 import SiteTitle from "../../components/SiteTitle";
+import { useState } from "react";
 
 const TaskDetails = () => {
 	const task = useLoaderData();
+	const { id } = useParams();
+	const [bids, setBids] = useState(task.bidsCount || 0);
+
+	const handleBid = () => {
+		fetch(`http://localhost:5000/tasks/${id}/bids`, {
+			method: "PATCH",
+			headers: {
+				"content-type": "application/json",
+			},
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.modifiedCount > 0) {
+					setBids(bids + 1);
+					toast.success("Bid placed successfully!");
+				} else {
+					toast.error("Failed to place bid.");
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				toast.error("Failed to place bid.");
+			});
+	};
 
 	return (
 		<div
@@ -12,6 +37,7 @@ const TaskDetails = () => {
 			data-aos='fade-up'
 		>
 			<SiteTitle>{task.title}</SiteTitle>
+			<p>You bid for {bids} opportunities.</p>
 			<h2 className='text-3xl font-bold text-primary mb-4'>{task.title}</h2>
 
 			<div className='text-gray-600 space-y-2'>
@@ -42,9 +68,9 @@ const TaskDetails = () => {
 			<div className='mt-6'>
 				<button
 					className='btn btn-primary'
-					onClick={() => toast.success(`Applied to ${task.title} successfully`)}
+					onClick={handleBid}
 				>
-					Apply for Task
+					Place Bid
 				</button>
 			</div>
 		</div>
