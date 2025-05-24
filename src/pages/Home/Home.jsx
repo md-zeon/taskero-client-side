@@ -11,8 +11,8 @@ const Home = () => {
 		<div className='max-w-7xl mx-auto px-4'>
 			<SiteTitle>Home</SiteTitle>
 			<Banner />
-			<FeaturedTasks tasks={featuredTasks} />
 			<HowItWorks />
+			<FeaturedTasks tasks={featuredTasks} />
 			<FAQ />
 		</div>
 	);

@@ -24,7 +24,7 @@ const steps = [
 const HowItWorks = () => {
 	return (
 		<section
-			className='py-14 px-4 md:px-10 bg-muted/10 rounded-2xl'
+			className='py-14 my-8 px-4 md:px-10 bg-muted/10 rounded-2xl'
 			data-aos='fade-up'
 			data-aos-delay='200'
 		>
