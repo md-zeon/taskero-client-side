@@ -1,12 +1,28 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 const ThemeController = () => {
+	const [theme, setTheme] = useState("winter");
+
+	useEffect(() => {
+		const stored = localStorage.getItem("theme");
+		if (stored) setTheme(stored);
+	}, []);
+
+	useEffect(() => {
+		document.documentElement.setAttribute("data-theme", theme);
+		localStorage.setItem("theme", theme);
+	}, [theme]);
+
+	const toggleTheme = () => {
+		setTheme((prev) => (prev === "winter" ? "forest" : "winter"));
+	};
+
 	return (
 		<label className='swap swap-rotate'>
 			<input
 				type='checkbox'
-				className='theme-controller'
-				value='forest'
+				onChange={toggleTheme}
+				checked={theme === "forest"}
 			/>
 
 			{/* sun icon */}
