@@ -1,4 +1,4 @@
-import { Typewriter } from "react-simple-typewriter";
+import GoBack from "../components/GoBack";
 
 const TermsAndConditions = () => {
 	return (
@@ -6,8 +6,9 @@ const TermsAndConditions = () => {
 			className='max-w-7xl mx-auto p-4'
 			data-aos='fade-up'
 		>
+			<GoBack />
 			<h2 className='text-3xl font-bold my-6 text-primary'>Terms and Conditions</h2>
-			<div className='card bg-base-100 shadow-xl'>
+			<div className='card bg-base-100 border-b pb-6 border-primary'>
 				<div className='card-body'>
 					<section
 						className='mb-6'

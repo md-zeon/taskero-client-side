@@ -81,6 +81,32 @@ const Navbar = () => {
 						className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'
 					>
 						{links}
+						<div className='flex gap-2 mt-2'>
+							{user ? (
+								<button
+									onClick={handleLogout}
+									className='btn btn-primary'
+								>
+									Logout
+								</button>
+							) : (
+								<>
+									{/* Login and Signup */}
+									<Link
+										to='/login'
+										className='btn btn-primary'
+									>
+										Login
+									</Link>
+									<Link
+										to='/signup'
+										className='btn btn-primary btn-outline'
+									>
+										Sign Up
+									</Link>
+								</>
+							)}
+						</div>
 					</ul>
 				</div>
 				<Link
@@ -118,30 +144,32 @@ const Navbar = () => {
 					</div>
 				)}
 
-				{user ? (
-					<button
-						onClick={handleLogout}
-						className='btn btn-primary'
-					>
-						Logout
-					</button>
-				) : (
-					<>
-						{/* Login and Signup */}
-						<Link
-							to='/login'
+				<div className="hidden sm:flex items-center gap-2">
+					{user ? (
+						<button
+							onClick={handleLogout}
 							className='btn btn-primary'
 						>
-							Login
-						</Link>
-						<Link
-							to='/signup'
-							className='btn btn-primary btn-outline'
-						>
-							Sign Up
-						</Link>
-					</>
-				)}
+							Logout
+						</button>
+					) : (
+						<>
+							{/* Login and Signup */}
+							<Link
+								to='/login'
+								className='btn btn-primary'
+							>
+								Login
+							</Link>
+							<Link
+								to='/signup'
+								className='btn btn-primary btn-outline'
+							>
+								Sign Up
+							</Link>
+						</>
+					)}
+				</div>
 			</div>
 		</div>
 	);

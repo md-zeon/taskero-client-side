@@ -39,6 +39,16 @@ const EditTask = () => {
 			budget: parseFloat(form.budget.value),
 		};
 
+		if (updatedTask.budget < 0) {
+			toast.error("Budget Can't be Negative!");
+			return;
+		}
+
+		if (updatedTask.budget == 0) {
+			toast.error("Budget Can't be Zero!");
+			return;
+		}
+
 		fetch(`https://taskero-server.vercel.app/tasks/${id}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
@@ -64,7 +74,7 @@ const EditTask = () => {
 			<SiteTitle>Update Task</SiteTitle>
 			<GoBack />
 			<h2 className='text-3xl font-bold text-center flex items-center justify-center gap-2 text-primary'>
-				<FaEdit /> Edit Task: <span className='italic text-gray-700'>{task.title}</span>
+				<FaEdit /> Update Task
 			</h2>
 
 			<form
@@ -132,6 +142,7 @@ const EditTask = () => {
 						</label>
 						<input
 							type='number'
+							min={0}
 							name='budget'
 							defaultValue={task.budget}
 							placeholder='Enter budget'

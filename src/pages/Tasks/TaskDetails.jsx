@@ -37,7 +37,7 @@ const TaskDetails = () => {
 			data-aos='fade-up'
 		>
 			<SiteTitle>{task.title}</SiteTitle>
-			<p>You bid for {bids} opportunities.</p>
+			<p className="badge badge-soft badge-primary badge-lg my-4">You bid for {bids} opportunities.</p>
 			<h2 className='text-3xl font-bold text-primary mb-4'>{task.title}</h2>
 
 			<div className='text-gray-600 space-y-2'>

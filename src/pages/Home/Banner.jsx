@@ -12,7 +12,7 @@ const bannerData = [
 		headline: "Post Freelance Tasks Easily",
 		text: "Let top freelancers bid on your tasks and get them done faster.",
 		ctaText: "Add Your Task",
-		ctaLink: "/add-task", // private route
+		ctaLink: "/add-task",
 	},
 	{
 		image: "https://i.ibb.co/fdNKBGps/slide1.png",

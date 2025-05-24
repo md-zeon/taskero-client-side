@@ -23,6 +23,17 @@ const AddTask = () => {
 			userEmail: user?.email,
 			userName: user?.displayName,
 		};
+
+		if (newTask.budget < 0) {
+			toast.error("Budget Can't be Negative!");
+			return;
+		}
+
+		if (newTask.budget == 0) {
+			toast.error("Budget Can't be Zero!");
+			return;
+		}
+
 		fetch("https://taskero-server.vercel.app/tasks", {
 			method: "POST",
 			headers: { "content-type": "application/json" },
@@ -44,8 +55,8 @@ const AddTask = () => {
 
 	return (
 		<div
-		className='max-w-4xl mx-auto mt-16 p-8 bg-gradient-to-br from-base-200 to-base-100 rounded-2xl shadow-2xl border border-base-300'
-		data-aos='fade-up'
+			className='max-w-4xl mx-auto mt-16 p-8 bg-gradient-to-br from-base-200 to-base-100 rounded-2xl shadow-2xl border border-base-300'
+			data-aos='fade-up'
 		>
 			<SiteTitle>Add Task</SiteTitle>
 			<h2
@@ -111,6 +122,7 @@ const AddTask = () => {
 					<FaDollarSign className='text-lg' />
 					<input
 						type='number'
+						min={0}
 						name='budget'
 						placeholder='Budget (USD)'
 						className='input input-bordered w-full'
@@ -142,7 +154,7 @@ const AddTask = () => {
 
 				<button
 					type='submit'
-					className='btn btn-primary w-full mt-4 hover:scale-95 transition-transform duration-300'
+					className='btn btn-primary w-full mt-4 hover:scale-101 transition-transform duration-300'
 				>
 					Submit Task
 				</button>

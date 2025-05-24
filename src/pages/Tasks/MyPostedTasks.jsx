@@ -69,7 +69,7 @@ const MyPostedTasks = () => {
 	}
 
 	return (
-		<div data-aos='fade-up' className='max-w-6xl mx-auto p-6 mt-10'>
+		<div data-aos='fade-up' className='max-w-6xl mx-auto p-6 my-10'>
 			<SiteTitle>My Posted Tasks</SiteTitle>
 			<h2 className='text-3xl font-bold mb-8 text-center'>My Posted Tasks</h2>
 
@@ -77,7 +77,7 @@ const MyPostedTasks = () => {
 				<p className='text-center text-gray-500'>You haven't posted any tasks yet.</p>
 			) : (
 				<div className='overflow-x-auto'>
-					<table className='table table-zebra w-full text-sm'>
+					<table className='table table-zebra w-full text-sm shadow shadow-primary'>
 						<thead className='bg-base-300 text-base-content'>
 							<tr>
 								<th>#</th>
@@ -104,7 +104,7 @@ const MyPostedTasks = () => {
 										<div className='flex gap-2 flex-wrap'>
 											<Link to={`/edit-task/${task._id}`}>
 												<button className='btn btn-xs btn-outline btn-info flex items-center gap-1'>
-													<FaEdit /> Edit
+													<FaEdit /> Update
 												</button>
 											</Link>
 											<button
