@@ -31,16 +31,39 @@
 
 ---
 
-## 📦 Repositories
-
-- 🔸 **Client-Side Repository**: [[https://github.com/Programming-Hero-Web-Course4/b11a10-client-side-md-zeon](https://github.com/Programming-Hero-Web-Course4/b11a10-client-side-md-zeon)]
-- 🔸 **Server-Side Repository**: [[https://github.com/Programming-Hero-Web-Course4/b11a10-server-side-md-zeon](https://github.com/Programming-Hero-Web-Course4/b11a10-server-side-md-zeon)]
-
----
-
 ## 🌐 Live Website
 
 🔗 **Frontend Live Site**: [https://taskero-60a20.web.app/](https://taskero-60a20.web.app/)  
 🔗 **Backend Live Server API**: [https://taskero-server.vercel.app/](https://taskero-server.vercel.app/)
 
 ---
+
+## ⚙️ Installation
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/zeon/taskero-client-side.git
+cd taskero-client-side
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Configure Firebase
+Create a .env.local file and add your Firebase configuration:
+```env
+VITE_API_KEY=your_api_key
+VITE_AUTH_DOMAIN=your_auth_domain
+VITE_PROJECT_ID=your_project_id
+VITE_STORAGE_BUCKET=your_storage_bucket
+VITE_MESSAGING_SENDER_ID=your_sender_id
+VITE_APP_ID=your_app_id
+```
+
+4. Run the Development Server
+```bash
+npm run dev
+```
+Visit: http://localhost:5173
