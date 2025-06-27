@@ -104,7 +104,7 @@ const AllDashboardTasks = () => {
 											to={`/task/${task._id}`}
 											className='btn btn-xs btn-outline btn-primary'
 										>
-											See Details
+											Details
 										</Link>
 									</td>
 								</tr>

@@ -38,12 +38,8 @@ input[type="number"] {
 	-moz-appearance: textfield;
 }
 
-.dashboard-menu li {
-	@apply w-full;
-}
-
 .dashboard-menu li a {
-	@apply px-4 py-2 rounded-sm w-full hover:bg-primary hover:text-base-200 transition-colors duration-200;
+	@apply px-4 py-2 rounded-sm w-54 hover:bg-primary hover:text-base-200 transition-colors duration-200;
 }
 
 .dashboard-menu li a.active {

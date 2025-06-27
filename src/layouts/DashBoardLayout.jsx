@@ -35,7 +35,7 @@ const DashBoardLayout = () => {
 	if (loading) return <Loader />;
 
 	return (
-		<div className='min-h-screen flex flex-col lg:flex-row bg-base-100'>
+		<div className='min-h-screen max-w-7xl mx-auto flex flex-col lg:flex-row bg-base-100'>
 			{/* Mobile Navbar Toggle */}
 			<div className='sticky top-0 z-20 flex items-center justify-between px-4 py-3 bg-base-200 lg:hidden'>
 				<h2 className='text-xl font-bold text-primary'>Taskero Dashboard</h2>

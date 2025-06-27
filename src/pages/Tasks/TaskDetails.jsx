@@ -3,6 +3,7 @@ import { useLoaderData, useParams } from "react-router";
 import { toast } from "react-toastify";
 import SiteTitle from "../../components/SiteTitle";
 import { useState } from "react";
+import GoBack from "../../components/GoBack";
 
 const TaskDetails = () => {
 	const task = useLoaderData();
@@ -37,6 +38,7 @@ const TaskDetails = () => {
 			data-aos='fade-up'
 		>
 			<SiteTitle>{task.title}</SiteTitle>
+			<GoBack />
 			<p className="badge badge-soft badge-primary badge-lg my-4">You bid for {bids} opportunities.</p>
 			<h2 className='text-3xl font-bold text-primary mb-4'>{task.title}</h2>
 
