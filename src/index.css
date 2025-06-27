@@ -37,3 +37,12 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
 	-moz-appearance: textfield;
 }
+
+.menu li a {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.menu li a.active {
+	  @apply bg-primary text-base-200;
+}

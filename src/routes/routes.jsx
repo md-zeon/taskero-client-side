@@ -12,6 +12,11 @@ import TaskDetails from "../pages/Tasks/TaskDetails";
 import MyPostedTasks from "../pages/Tasks/MyPostedTasks";
 import EditTask from "../pages/Tasks/EditTask";
 import TermsAndConditions from "../pages/TermsAndConditions";
+import DashBoardLayout from "../layouts/DashBoardLayout";
+import Overview from "../pages/DashBoard/Overview";
+import AllDashboardTasks from "../pages/DashBoard/AllDashboardTasks";
+import MyDashboardTasks from "../pages/DashBoard/MyDashboardTasks";
+import EditProfile from "../pages/DashBoard/EditProfile";
 
 const router = createBrowserRouter([
 	{
@@ -79,6 +84,36 @@ const router = createBrowserRouter([
 			{
 				path: "/terms",
 				Component: TermsAndConditions,
+			},
+		],
+	},
+	{
+		path: "/dashboard",
+		Component: DashBoardLayout,
+		children: [
+			{
+				index: true,
+				element: <Overview />,
+				loader: () => fetch("https://taskero-server.vercel.app/tasks"),
+				hydrateFallbackElement: <Loader />,
+			},
+			{
+				path: "all-tasks",
+				element: <AllDashboardTasks />,
+				loader: () => fetch("https://taskero-server.vercel.app/tasks"),
+				hydrateFallbackElement: <Loader />,
+			},
+			{
+				path: "my-tasks",
+				element: <MyDashboardTasks />,
+			},
+			{
+				path: "add-task",
+				element: <AddTask />,
+			},
+			{
+				path: "edit-profile",
+				Component: EditProfile,
 			},
 		],
 	},
