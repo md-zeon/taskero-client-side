@@ -17,6 +17,8 @@ import Overview from "../pages/DashBoard/Overview";
 import AllDashboardTasks from "../pages/DashBoard/AllDashboardTasks";
 import MyDashboardTasks from "../pages/DashBoard/MyDashboardTasks";
 import EditProfile from "../pages/DashBoard/EditProfile";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
 
 const router = createBrowserRouter([
 	{
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
 				Component: Home,
 				loader: () => fetch("https://taskero-server.vercel.app/tasks?limit=8&sort=deadline"),
 				hydrateFallbackElement: <Loader />,
+			},
+			{
+				path: "/about-us",
+				Component: About,
+			},
+			{
+				path: "/contact-us",
+				Component: Contact,
 			},
 			{
 				path: "/add-task",

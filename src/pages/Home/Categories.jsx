@@ -16,7 +16,10 @@ const Categories = () => {
 			className='py-12'
 			data-aos='fade-up'
 		>
-			<h2 className='text-3xl font-bold text-center text-primary mb-12'>Explore Categories</h2>
+			<h2 className='text-3xl font-bold text-center text-primary mb-4'>Explore Categories</h2>
+			<p className='text-center text-gray-600 max-w-2xl mb-12 mx-auto'>
+				Browse all major task categories such as Development, Design, Writing, Marketing, etc by a single click.
+			</p>
 
 			<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 max-w-5xl mx-auto'>
 				{categories.map((cat, idx) => (

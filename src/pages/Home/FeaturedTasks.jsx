@@ -8,9 +8,13 @@ const FeaturedTasks = ({ tasks }) => {
 			data-aos='fade-up'
 			data-aos-delay='100'
 		>
-			<h2 className='text-3xl font-bold text-center text-primary mb-12 flex items-center justify-center gap-2'>
+			<h2 className='text-3xl font-bold text-center text-primary mb-4 flex items-center justify-center gap-2'>
 				<FaBriefcase /> Featured Tasks
 			</h2>
+			<p className='text-center text-gray-600 max-w-2xl mb-12 mx-auto'>
+				Browse a curated selection of tasks handpicked for their clarity, quality, or value — ideal opportunities for
+				freelancers ready to get started.
+			</p>
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
 				{tasks.length > 0 ? (
 					tasks.map((task) => (
@@ -48,8 +52,13 @@ const FeaturedTasks = ({ tasks }) => {
 					<p className='text-center col-span-full text-gray-500'>No tasks available.</p>
 				)}
 			</div>
-			<div className="text-center mt-12">
-				<Link to="/browse-tasks" className="btn btn-primary btn-wide btn-outline">Show More</Link>
+			<div className='text-center mt-12'>
+				<Link
+					to='/browse-tasks'
+					className='btn btn-primary btn-wide btn-outline'
+				>
+					Show More
+				</Link>
 			</div>
 		</section>
 	);

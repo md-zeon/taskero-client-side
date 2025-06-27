@@ -24,7 +24,12 @@ const steps = [
 const HowItWorks = () => {
 	return (
 		<section className='py-10 bg-muted/10 rounded-2xl'>
-			<h2 className='text-3xl font-bold text-center mb-12 text-primary'>How Taskero Works</h2>
+			<h2 className='text-3xl font-bold text-center mb-4 text-primary'>How Taskero Works</h2>
+			<p className='text-center text-gray-600 max-w-2xl mb-12 mx-auto'>
+				A simplified 3-step guide that helps users understand how to use Taskero — from posting a task to hiring a
+				freelancer.
+			</p>
+
 			<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
 				{steps.map((step, idx) => (
 					<div

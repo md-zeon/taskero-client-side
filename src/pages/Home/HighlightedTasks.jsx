@@ -17,18 +17,22 @@ const HighlightedTasks = () => {
 			});
 	}, []);
 
-    if (loading) {
-        return <Loader />
-    }
+	if (loading) {
+		return <Loader />;
+	}
 
 	return (
 		<section
 			className='py-10'
 			data-aos='fade-up'
 		>
-			<h2 className='text-3xl font-bold text-center text-primary mb-12 flex items-center justify-center gap-2'>
+			<h2 className='text-3xl font-bold text-center text-primary mb-4 flex items-center justify-center gap-2'>
 				<FaFire className='text-primary' /> Highlighted Tasks
 			</h2>
+			<p className='text-center text-gray-600 max-w-2xl mb-12 mx-auto'>
+				Discover tasks that are attracting the most bids — popular opportunities with strong engagement from top
+				freelancers.
+			</p>
 
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
 				{highlightedTasks.map((task) => (
