@@ -52,7 +52,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<div className='navbar bg-base-100 shadow-sm'>
+		<div className='navbar bg-base-100 px-4 max-w-7xl mx-auto'>
 			<div className='navbar-start'>
 				<div className='dropdown'>
 					<div
@@ -116,7 +116,7 @@ const Navbar = () => {
 					{/* Logo */}
 					<CgGoogleTasks className='animate-pulse text-primary' />
 					{/* Name */}
-					<span className='font-bold'>Taskero</span>
+					<span className='font-bold hover:text-primary transition-colors duration-300'>Taskero</span>
 				</Link>
 			</div>
 			<div className='navbar-center hidden lg:flex'>

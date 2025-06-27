@@ -44,13 +44,13 @@ const Banner = () => {
 			keyboard={{ enabled: true }}
 			pagination={{ clickable: true }}
 			autoplay={{ delay: 4000 }}
-			className='mySwiper rounded-2xl overflow-hidden mt-8 shadow-lg'
+			className='mySwiper rounded-2xl overflow-hidden mt-4 shadow-lg'
 			data-aos='fade-up'
 		>
 			{bannerData.map((slide, idx) => (
 				<SwiperSlide key={idx}>
 					<div
-						className='h-[80vh] w-full bg-cover bg-center relative flex items-center justify-center'
+						className='h-[70vh] max-h-[480px] w-full bg-cover bg-center relative flex items-center justify-center'
 						style={{
 							backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url(${slide.image})`,
 						}}

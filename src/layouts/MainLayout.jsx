@@ -7,10 +7,10 @@ const MainLayout = () => {
 	const { state } = useNavigation();
 	return (
 		<>
-			<header className='max-w-7xl mx-auto sticky top-0 border-b border-b-primary z-50'>
+			<header className='sticky top-0 border-b border-b-primary z-50'>
 				<Navbar />
 			</header>
-			<main className='max-w-7xl mx-auto pb-10'>{state === "loading" ? <Loader /> : <Outlet />}</main>
+			<main className='max-w-7xl mx-auto pb-10 px-4'>{state === "loading" ? <Loader /> : <Outlet />}</main>
 			<footer className='bg-base-200'>
 				<Footer />
 			</footer>

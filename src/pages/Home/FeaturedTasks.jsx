@@ -4,11 +4,11 @@ import { FaBriefcase, FaClock, FaDollarSign, FaUser } from "react-icons/fa";
 const FeaturedTasks = ({ tasks }) => {
 	return (
 		<section
-			className='py-10 my-12 rounded-2xl'
+			className='pb-10  rounded-2xl'
 			data-aos='fade-up'
 			data-aos-delay='100'
 		>
-			<h2 className='text-3xl font-bold text-center text-primary mb-8 flex items-center justify-center gap-2'>
+			<h2 className='text-3xl font-bold text-center text-primary mb-12 flex items-center justify-center gap-2'>
 				<FaBriefcase /> Featured Tasks
 			</h2>
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
