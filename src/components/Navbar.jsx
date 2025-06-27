@@ -13,15 +13,19 @@ const Navbar = () => {
 			<li>
 				<NavLink to='/'>Home</NavLink>
 			</li>
-			<li>
-				<NavLink to='/add-task'>Add Task</NavLink>
-			</li>
+			{user && (
+				<li>
+					<NavLink to='/add-task'>Add Task</NavLink>
+				</li>
+			)}
 			<li>
 				<NavLink to='/browse-tasks'>Browse Tasks</NavLink>
 			</li>
-			<li>
-				<NavLink to='/my-posted-tasks'>My Posted Tasks</NavLink>
-			</li>
+			{user && (
+				<li>
+					<NavLink to='/my-posted-tasks'>My Posted Tasks</NavLink>
+				</li>
+			)}
 		</>
 	);
 
@@ -144,7 +148,7 @@ const Navbar = () => {
 					</div>
 				)}
 
-				<div className="hidden sm:flex items-center gap-2">
+				<div className='hidden sm:flex items-center gap-2'>
 					{user ? (
 						<button
 							onClick={handleLogout}
