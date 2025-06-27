@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useSearchParams } from "react-router";
 import { FaSearch, FaBriefcase, FaClock, FaDollarSign, FaUser, FaFilter } from "react-icons/fa";
 import SiteTitle from "../../components/SiteTitle";
 
 const BrowseTasks = () => {
 	const tasks = useLoaderData();
 	const [filtered, setFiltered] = useState([]);
-	const [category, setCategory] = useState("All");
+	const [searchParams] = useSearchParams();
+	const categoryFromURL = searchParams.get("category");
+	const [category, setCategory] = useState(categoryFromURL || "All");
 	const [sortOrder, setSortOrder] = useState("none");
 
 	useEffect(() => {
@@ -61,7 +63,12 @@ const BrowseTasks = () => {
 						defaultValue={sortOrder}
 						onChange={(e) => setSortOrder(e.target.value)}
 					>
-						<option value='none' disabled={true}>No Sort</option>
+						<option
+							value='none'
+							disabled={true}
+						>
+							No Sort
+						</option>
 						<option value='asc'>Ascending</option>
 						<option value='desc'>Descending</option>
 					</select>

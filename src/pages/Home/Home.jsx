@@ -5,6 +5,7 @@ import HowItWorks from "./HowItWorks";
 import FAQ from "./FAQ";
 import { Link, useLoaderData } from "react-router";
 import HighlightedTasks from "./HighlightedTasks";
+import Categories from "./Categories";
 const Home = () => {
 	const featuredTasks = useLoaderData();
 
@@ -13,6 +14,9 @@ const Home = () => {
 			<SiteTitle>Home</SiteTitle>
 			<Banner />
 			<HowItWorks />
+			<Categories />
+			<FeaturedTasks tasks={featuredTasks} />
+			<HighlightedTasks tasks={featuredTasks} />
 			<div
 				className='bg-primary text-white text-center p-8 rounded-xl shadow-md'
 				data-aos='zoom-in'
@@ -26,8 +30,6 @@ const Home = () => {
 					Post a Task
 				</Link>
 			</div>
-			<FeaturedTasks tasks={featuredTasks} />
-			<HighlightedTasks tasks={featuredTasks} />
 			<FAQ />
 		</div>
 	);
