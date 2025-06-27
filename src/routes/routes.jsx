@@ -28,7 +28,7 @@ const router = createBrowserRouter([
 			{
 				index: true,
 				Component: Home,
-				loader: () => fetch("https://taskero-server.vercel.app/tasks?limit=6&sort=deadline"),
+				loader: () => fetch("https://taskero-server.vercel.app/tasks?limit=8&sort=deadline"),
 				hydrateFallbackElement: <Loader />,
 			},
 			{

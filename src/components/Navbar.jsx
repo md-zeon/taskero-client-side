@@ -15,11 +15,6 @@ const Navbar = () => {
 			</li>
 			{user && (
 				<li>
-					<NavLink to='/dashboard'>DashBoard</NavLink>
-				</li>
-			)}
-			{user && (
-				<li>
 					<NavLink to='/add-task'>Add Task</NavLink>
 				</li>
 			)}
@@ -29,6 +24,11 @@ const Navbar = () => {
 			{user && (
 				<li>
 					<NavLink to='/my-posted-tasks'>My Posted Tasks</NavLink>
+				</li>
+			)}
+			{user && (
+				<li>
+					<NavLink to='/dashboard'>DashBoard</NavLink>
 				</li>
 			)}
 		</>
