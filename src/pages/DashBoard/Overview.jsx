@@ -79,7 +79,7 @@ const Overview = () => {
 			{/* Task Statistics */}
 			<div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
 				<div
-					className='card bg-base-200 shadow-md border border-primary'
+					className='card bg-base-200 shadow-md border border-primary hover:scale-101'
 					data-aos='zoom-in'
 					data-aos-delay='200'
 				>
@@ -89,7 +89,7 @@ const Overview = () => {
 					</div>
 				</div>
 				<div
-					className='card bg-base-200 shadow-md border border-primary'
+					className='card bg-base-200 shadow-md border border-primary hover:scale-101'
 					data-aos='zoom-in'
 					data-aos-delay='300'
 				>
@@ -99,7 +99,7 @@ const Overview = () => {
 					</div>
 				</div>
 				<div
-					className='card bg-base-200 shadow-md border border-primary'
+					className='card bg-base-200 shadow-md border border-primary hover:scale-101'
 					data-aos='zoom-in'
 					data-aos-delay='400'
 				>
@@ -112,7 +112,7 @@ const Overview = () => {
 
 			{/* Recent Tasks */}
 			<div
-				className='card bg-base-100 shadow-lg border border-primary'
+				className='card bg-base-100 shadow-lg'
 				data-aos='fade-up'
 				data-aos-delay='500'
 			>

@@ -93,7 +93,11 @@ const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <Overview />,
+				element: (
+					<PrivateRoute>
+						<Overview />
+					</PrivateRoute>
+				),
 				loader: () => fetch("https://taskero-server.vercel.app/tasks"),
 				hydrateFallbackElement: <Loader />,
 			},
@@ -105,15 +109,27 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "my-tasks",
-				element: <MyDashboardTasks />,
+				element: (
+					<PrivateRoute>
+						<MyDashboardTasks />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "add-task",
-				element: <AddTask />,
+				element: (
+					<PrivateRoute>
+						<AddTask />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: "edit-profile",
-				Component: EditProfile,
+				element: (
+					<PrivateRoute>
+						<EditProfile />
+					</PrivateRoute>
+				),
 			},
 		],
 	},
