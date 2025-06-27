@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router";
-import { FaSearch, FaBriefcase, FaClock, FaDollarSign, FaUser } from "react-icons/fa";
+import { FaSearch, FaBriefcase, FaClock, FaDollarSign, FaUser, FaFilter } from "react-icons/fa";
 import SiteTitle from "../../components/SiteTitle";
 
 const BrowseTasks = () => {
 	const tasks = useLoaderData();
 	const [filtered, setFiltered] = useState([]);
 	const [category, setCategory] = useState("All");
+	const [sortOrder, setSortOrder] = useState("none");
 
 	useEffect(() => {
-		if (category === "All") {
-			setFiltered(tasks);
-		} else {
-			setFiltered(tasks.filter((task) => task.category === category));
+		let filteredTasks = [...tasks];
+		if (category !== "All") {
+			filteredTasks = filteredTasks.filter((task) => task.category === category);
 		}
-	}, [category, tasks]);
+
+		if (sortOrder !== "none") {
+			filteredTasks = [...filteredTasks].sort((a, b) =>
+				sortOrder === "asc" ? a.budget - b.budget : b.budget - a.budget,
+			);
+		}
+		setFiltered(filteredTasks);
+	}, [category, tasks, sortOrder]);
 
 	const categories = ["All", "Web Development", "Design", "Writing", "Marketing", "Data Entry", "Other"];
 
@@ -41,6 +48,24 @@ const BrowseTasks = () => {
 						{cat}
 					</button>
 				))}
+			</div>
+
+			<div className='flex justify-end mb-8 text-primary'>
+				<div></div>
+				<div className='flex gap-2'>
+					<label className='block text-sm font-medium text-gray-700 mb-2'>
+						<FaFilter className='inline text-primary' /> Sort by Budget
+					</label>
+					<select
+						className='select select-bordered'
+						defaultValue={sortOrder}
+						onChange={(e) => setSortOrder(e.target.value)}
+					>
+						<option value='none' disabled={true}>No Sort</option>
+						<option value='asc'>Ascending</option>
+						<option value='desc'>Descending</option>
+					</select>
+				</div>
 			</div>
 
 			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
