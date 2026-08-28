@@ -1,44 +1,65 @@
-import { use } from "react";
-import { CgGoogleTasks } from "react-icons/cg";
-import { Link, NavLink } from "react-router";
+import { use, useState } from "react";
+import {
+	CheckSquare2,
+	Menu,
+	Plus,
+	LayoutDashboard,
+	ClipboardList,
+	LogOut,
+	UserCog,
+	LogIn,
+	UserPlus,
+	ChevronDown,
+} from "lucide-react";
+import { Link, NavLink, useNavigate } from "react-router";
 import AuthContext from "../context/AuthContext";
 import ThemeController from "./ThemeController";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+	Sheet,
+	SheetContent,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
+const publicLinks = [
+	{ to: "/", label: "Home" },
+	{ to: "/browse-tasks", label: "Browse Tasks" },
+	{ to: "/about-us", label: "About" },
+	{ to: "/contact-us", label: "Contact" },
+];
+
+const userLinks = [
+	{ to: "/dashboard", label: "Overview", icon: <LayoutDashboard className='size-4' /> },
+	{ to: "/dashboard/my-tasks", label: "My Tasks", icon: <ClipboardList className='size-4' /> },
+];
+
+const Logo = () => (
+	<Link to='/' className='flex items-center gap-2' aria-label='Taskero home'>
+		<span className='grid size-9 place-items-center rounded-lg bg-primary text-primary-foreground'>
+			<CheckSquare2 className='size-5' />
+		</span>
+		<span className='text-xl font-extrabold tracking-tight'>Taskero</span>
+	</Link>
+);
+
 const Navbar = () => {
 	const { user, logout } = use(AuthContext);
-	const links = (
-		<>
-			<li>
-				<NavLink to='/'>Home</NavLink>
-			</li>
-			{user && (
-				<li>
-					<NavLink to='/add-task'>Add Task</NavLink>
-				</li>
-			)}
-			<li>
-				<NavLink to='/about-us'>About Us</NavLink>
-			</li>
-			<li>
-				<NavLink to='/browse-tasks'>Browse Tasks</NavLink>
-			</li>
-			<li>
-				<NavLink to='/contact-us'>Contact Us</NavLink>
-			</li>
-			{user && (
-				<li>
-					<NavLink to='/my-posted-tasks'>My Posted Tasks</NavLink>
-				</li>
-			)}
-			{user && (
-				<li>
-					<NavLink to='/dashboard'>DashBoard</NavLink>
-				</li>
-			)}
-		</>
-	);
+	const navigate = useNavigate();
+	const [mobileOpen, setMobileOpen] = useState(false);
 
 	const handleLogout = () => {
 		Swal.fire({
@@ -46,7 +67,7 @@ const Navbar = () => {
 			text: "You want to logout?",
 			icon: "warning",
 			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
+			confirmButtonColor: "#b45309",
 			cancelButtonColor: "#d33",
 			confirmButtonText: "Yes, logout!",
 		}).then((result) => {
@@ -58,6 +79,7 @@ const Navbar = () => {
 							text: "You have logged out successfully.",
 							icon: "success",
 						});
+						navigate("/");
 					})
 					.catch((error) => {
 						toast.error(error.message);
@@ -67,126 +89,182 @@ const Navbar = () => {
 	};
 
 	return (
-		<div className='navbar bg-base-100 px-4 max-w-7xl mx-auto'>
-			<div className='navbar-start'>
-				<div className='dropdown'>
-					<div
-						tabIndex={0}
-						role='button'
-						className='btn lg:hidden'
-					>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							className='h-5 w-5'
-							fill='none'
-							viewBox='0 0 24 24'
-							stroke='currentColor'
-						>
-							{" "}
-							<path
-								strokeLinecap='round'
-								strokeLinejoin='round'
-								strokeWidth='2'
-								d='M4 6h16M4 12h8m-8 6h16'
-							/>{" "}
-						</svg>
-					</div>
-					<ul
-						tabIndex={0}
-						className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'
-					>
-						{links}
-						<div className='flex gap-2 mt-2'>
-							{user ? (
-								<button
-									onClick={handleLogout}
-									className='btn btn-primary'
-								>
-									Logout
-								</button>
-							) : (
-								<>
-									{/* Login and Signup */}
-									<Link
-										to='/login'
-										className='btn btn-primary'
-									>
-										Login
-									</Link>
-									<Link
-										to='/signup'
-										className='btn btn-primary btn-outline'
-									>
-										Sign Up
-									</Link>
-								</>
-							)}
-						</div>
-					</ul>
-				</div>
-				<Link
-					to='/'
-					className='text-2xl flex gap-1 items-center'
-				>
-					{/* Logo */}
-					<CgGoogleTasks className='animate-pulse text-primary' />
-					{/* Name */}
-					<span className='font-bold hover:text-primary transition-colors duration-300'>Taskero</span>
-				</Link>
-			</div>
-			<div className='navbar-center hidden lg:flex'>
-				<ul className='menu menu-horizontal px-1'>{links}</ul>
-			</div>
-			<div className='navbar-end space-x-2'>
-				{/* Theme Controller */}
-				<ThemeController />
-				{/* User Profile */}
-				{user && (
-					<div className='dropdown dropdown-end group z-50'>
-						<div className='btn btn-ghost btn-circle avatar'>
-							<div className='w-8 rounded-full'>
-								<img
-									alt='Profile Picture'
-									src={user?.photoURL || "https://img.icons8.com/fluency-systems-regular/48/user-male-circle--v1.png"}
-								/>
-							</div>
-						</div>
-						<div className='card absolute right-5 top-14 bg-base-100 shadow hidden group-hover:flex'>
-							<div className='card-body px-5 py-3'>
-								<span className='font-bold text-lg'>{user?.displayName}</span>
-							</div>
-						</div>
-					</div>
-				)}
+		<header className='sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-md'>
+			<div className='container-tight flex h-16 items-center justify-between gap-4'>
+				<Logo />
 
-				<div className='hidden sm:flex items-center gap-2'>
-					{user ? (
-						<button
-							onClick={handleLogout}
-							className='btn btn-primary'
+				{/* Desktop nav */}
+				<nav className='hidden items-center gap-1 lg:flex'>
+					{publicLinks.map((link) => (
+						<NavLink
+							key={link.to}
+							to={link.to}
+							end={link.to === "/"}
+							className={({ isActive }) =>
+								cn(
+									"rounded-md px-3 py-2 text-sm font-medium transition-colors",
+									isActive
+										? "text-primary"
+										: "text-muted-foreground hover:text-foreground",
+								)
+							}
 						>
-							Logout
-						</button>
-					) : (
+							{link.label}
+						</NavLink>
+					))}
+				</nav>
+
+				<div className='flex items-center gap-1.5'>
+					<ThemeController />
+
+					{user ? (
 						<>
-							{/* Login and Signup */}
-							<Link
-								to='/login'
-								className='btn btn-primary'
-							>
-								Login
-							</Link>
-							<Link
-								to='/signup'
-								className='btn btn-primary btn-outline'
-							>
-								Sign Up
-							</Link>
+							<Button asChild className='hidden md:inline-flex'>
+								<Link to='/dashboard/add-task'>
+									<Plus className='size-4' /> Add Task
+								</Link>
+							</Button>
+
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<button className='ml-1 flex items-center gap-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 cursor-pointer'>
+										<Avatar className='size-9'>
+											<AvatarImage
+												src={user?.photoURL}
+												alt={user?.displayName || "Profile"}
+											/>
+											<AvatarFallback>
+												{(user?.displayName || user?.email || "U")
+													.slice(0, 2)
+													.toUpperCase()}
+											</AvatarFallback>
+										</Avatar>
+										<ChevronDown className='hidden size-4 text-muted-foreground sm:block' />
+									</button>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent align='end' className='w-56'>
+									<DropdownMenuLabel className='flex flex-col gap-0.5'>
+										<span className='truncate font-semibold'>
+											{user?.displayName || "Account"}
+										</span>
+										<span className='truncate text-xs font-normal text-muted-foreground'>
+											{user?.email}
+										</span>
+									</DropdownMenuLabel>
+									<DropdownMenuSeparator />
+									{userLinks.map((link) => (
+										<DropdownMenuItem asChild key={link.to}>
+											<NavLink to={link.to}>
+												{link.icon}
+												{link.label}
+											</NavLink>
+										</DropdownMenuItem>
+									))}
+									<DropdownMenuItem asChild>
+										<NavLink to='/dashboard/edit-profile'>
+											<UserCog className='size-4' /> Edit Profile
+										</NavLink>
+									</DropdownMenuItem>
+									<DropdownMenuSeparator />
+									<DropdownMenuItem
+										variant='destructive'
+										onClick={handleLogout}
+									>
+										<LogOut className='size-4' /> Logout
+									</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
 						</>
+					) : (
+						<div className='hidden items-center gap-2 sm:flex'>
+							<Button asChild variant='ghost'>
+								<Link to='/login'>
+									<LogIn className='size-4' /> Login
+								</Link>
+							</Button>
+							<Button asChild>
+								<Link to='/signup'>
+									<UserPlus className='size-4' /> Sign Up
+								</Link>
+							</Button>
+						</div>
 					)}
+
+					{/* Mobile menu */}
+					<Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+						<SheetTrigger asChild className='lg:hidden'>
+							<Button variant='ghost' size='icon' aria-label='Open menu'>
+								<Menu className='size-5' />
+							</Button>
+						</SheetTrigger>
+						<SheetContent side='right' className='w-72'>
+							<SheetHeader>
+								<SheetTitle className='text-left'>Menu</SheetTitle>
+							</SheetHeader>
+							<div className='flex flex-col gap-1 px-2'>
+								{publicLinks.map((link) => (
+									<NavLink
+										key={link.to}
+										to={link.to}
+										end={link.to === "/"}
+										onClick={() => setMobileOpen(false)}
+										className={({ isActive }) =>
+											cn(
+												"rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
+												isActive
+													? "bg-accent text-accent-foreground"
+													: "text-muted-foreground hover:bg-accent hover:text-foreground",
+											)
+										}
+									>
+										{link.label}
+									</NavLink>
+								))}
+								{user && (
+									<>
+										<div className='my-2 h-px bg-border' />
+										{userLinks.map((link) => (
+											<NavLink
+												key={link.to}
+												to={link.to}
+												onClick={() => setMobileOpen(false)}
+												className='flex items-center gap-2 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground'
+											>
+												{link.icon}
+												{link.label}
+											</NavLink>
+										))}
+										<button
+											onClick={() => {
+												setMobileOpen(false);
+												handleLogout();
+											}}
+											className='flex items-center gap-2 rounded-md px-3 py-2.5 text-left text-sm font-medium text-destructive hover:bg-destructive/10'
+										>
+											<LogOut className='size-4' /> Logout
+										</button>
+									</>
+								)}
+							</div>
+							{!user && (
+								<div className='mt-4 flex flex-col gap-2 px-4'>
+									<Button asChild onClick={() => setMobileOpen(false)}>
+										<Link to='/signup'>
+											<UserPlus className='size-4' /> Sign Up
+										</Link>
+									</Button>
+									<Button asChild variant='outline' onClick={() => setMobileOpen(false)}>
+										<Link to='/login'>
+											<LogIn className='size-4' /> Login
+										</Link>
+									</Button>
+								</div>
+							)}
+						</SheetContent>
+					</Sheet>
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 };
 

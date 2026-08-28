@@ -6,15 +6,13 @@ import Footer from "../components/Footer";
 const MainLayout = () => {
 	const { state } = useNavigation();
 	return (
-		<>
-			<header className='sticky top-0 border-b border-b-primary z-50'>
-				<Navbar />
-			</header>
-			<main className='max-w-7xl mx-auto pb-10 px-4'>{state === "loading" ? <Loader /> : <Outlet />}</main>
-			<footer className='bg-base-200'>
-				<Footer />
-			</footer>
-		</>
+		<div className='flex min-h-screen flex-col'>
+			<Navbar />
+			<main className='flex-1'>
+				{state === "loading" ? <Loader /> : <Outlet />}
+			</main>
+			<Footer />
+		</div>
 	);
 };
 
