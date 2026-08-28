@@ -51,16 +51,29 @@ cd taskero-client-side
 npm install
 ```
 
-### 3. Configure Firebase
-Create a .env.local file and add your Firebase configuration:
-```env
-VITE_API_KEY=your_api_key
-VITE_AUTH_DOMAIN=your_auth_domain
-VITE_PROJECT_ID=your_project_id
-VITE_STORAGE_BUCKET=your_storage_bucket
-VITE_MESSAGING_SENDER_ID=your_sender_id
-VITE_APP_ID=your_app_id
+### 3. Configure Environment Variables
+Copy `.env.example` to `.env.local` and fill in your Firebase and API configuration:
+
+```bash
+# Windows
+copy .env.example .env.local
+# macOS / Linux
+cp .env.example .env.local
 ```
+
+The `.env.local` file should include:
+```env
+VITE_FIREBASE_apiKey=your_api_key
+VITE_FIREBASE_authDomain=your_project_id.firebaseapp.com
+VITE_FIREBASE_projectId=your_project_id
+VITE_FIREBASE_storageBucket=your_project_id.appspot.com
+VITE_FIREBASE_messagingSenderId=your_sender_id
+VITE_FIREBASE_appId=your_app_id
+VITE_API_URL=https://your-api.vercel.app
+```
+
+- `VITE_FIREBASE_*` variables come from your Firebase project → Project Settings → Your app.
+- `VITE_API_URL` points to your backend. Leave it empty to use the default production URL, or set it to `http://localhost:5000` when running the server locally.
 
 4. Run the Development Server
 ```bash
