@@ -1,10 +1,24 @@
 import { use, useEffect, useState } from "react";
-import { FaTasks, FaDollarSign, FaClock, FaUserEdit } from "react-icons/fa";
+import { Briefcase, DollarSign, ClipboardList, UserRound, ArrowUpRight } from "lucide-react";
 import { Link, useLoaderData } from "react-router";
 import { toast } from "react-toastify";
 import AuthContext from "../../context/AuthContext";
 import SiteTitle from "../../components/SiteTitle";
 import Loader from "../../components/Loader";
+import DashboardStat from "../../components/DashboardStat";
+import { tasksUrl } from "../../config/api";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
 
 const Overview = () => {
 	const { user } = use(AuthContext);
@@ -15,7 +29,7 @@ const Overview = () => {
 
 	useEffect(() => {
 		if (user?.email) {
-			fetch(`https://taskero-server.vercel.app/tasks?email=${user.email}`)
+			fetch(tasksUrl(`?email=${user.email}`))
 				.then((res) => res.json())
 				.then((data) => {
 					setTasks(data);
@@ -38,129 +52,123 @@ const Overview = () => {
 		return <Loader />;
 	}
 
+	const initials = (user?.displayName || "?")
+		.split(" ")
+		.map((n) => n[0])
+		.slice(0, 2)
+		.join("")
+		.toUpperCase();
+
 	return (
-		<div
-			className='max-w-7xl mx-auto px-4 py-10'
-			data-aos='fade-up'
-		>
+		<div className='mx-auto max-w-360 px-4 py-8'>
 			<SiteTitle>Dashboard Overview</SiteTitle>
-			<h2 className='text-3xl font-bold text-primary mb-8 flex items-center gap-2'>
-				<FaTasks /> Dashboard Overview
-			</h2>
 
-			{/* Profile */}
-			<div
-				className='card bg-base-100 shadow-lg border border-primary mb-8'
-				data-aos='fade-up'
-				data-aos-delay='100'
-			>
-				<div className='card-body flex flex-col md:flex-row items-center gap-6'>
-					<div className='avatar'>
-						<div className='w-24 rounded-full'>
-							<img
-								src={user?.photoURL || "https://img.icons8.com/fluency-systems-regular/48/user-male-circle--v1.png"}
-								alt='Profile'
-							/>
-						</div>
+			<div className='mb-8'>
+				<h2 className='mb-1 text-3xl font-bold tracking-tight'>
+					Welcome back, {user?.displayName?.split(" ")[0] || "there"}
+				</h2>
+				<p className='text-muted-foreground'>
+					Here's an overview of your activity on Taskero.
+				</p>
+			</div>
+
+			<Card className='mb-8'>
+				<CardContent className='flex flex-col items-center gap-6 p-6 md:flex-row'>
+					<Avatar className='size-20 ring-2 ring-primary/30 ring-offset-2 ring-offset-background'>
+						<AvatarImage src={user?.photoURL} alt='Profile' />
+						<AvatarFallback className='text-lg'>{initials}</AvatarFallback>
+					</Avatar>
+					<div className='flex-1 text-center md:text-left'>
+						<h3 className='text-xl font-semibold'>{user?.displayName}</h3>
+						<p className='text-muted-foreground'>{user?.email}</p>
 					</div>
-					<div>
-						<h3 className='text-xl font-semibold text-primary'>{user?.displayName}</h3>
-						<p className='text-base-content'>{user?.email}</p>
-						<Link
-							to='/dashboard/edit-profile'
-							className='btn btn-sm btn-outline btn-primary mt-4 flex items-center gap-2'
-						>
-							<FaUserEdit /> Edit Profile
+					<Button asChild variant='outline'>
+						<Link to='/dashboard/edit-profile'>
+							<UserRound className='size-4' /> Edit Profile
 						</Link>
-					</div>
-				</div>
+					</Button>
+				</CardContent>
+			</Card>
+
+			<div className='mb-8 grid grid-cols-1 gap-5 sm:grid-cols-3'>
+				<DashboardStat
+					icon={<Briefcase className='size-6' />}
+					label='Tasks Posted'
+					value={stats.posted}
+				/>
+				<DashboardStat
+					icon={<DollarSign className='size-6' />}
+					label='Bids Received'
+					value={stats.bids}
+				/>
+				<DashboardStat
+					icon={<ClipboardList className='size-6' />}
+					label='Total Tasks'
+					value={stats.total}
+				/>
 			</div>
 
-			{/* Task Statistics */}
-			<div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
-				<div
-					className='card bg-base-200 shadow-md border border-primary hover:scale-101'
-					data-aos='zoom-in'
-					data-aos-delay='200'
-				>
-					<div className='card-body text-center'>
-						<h3 className='text-lg font-semibold text-primary'>Tasks Posted</h3>
-						<p className='text-2xl font-bold'>{stats.posted}</p>
-					</div>
-				</div>
-				<div
-					className='card bg-base-200 shadow-md border border-primary hover:scale-101'
-					data-aos='zoom-in'
-					data-aos-delay='300'
-				>
-					<div className='card-body text-center'>
-						<h3 className='text-lg font-semibold text-primary'>Bids Received</h3>
-						<p className='text-2xl font-bold'>{stats.bids}</p>
-					</div>
-				</div>
-				<div
-					className='card bg-base-200 shadow-md border border-primary hover:scale-101'
-					data-aos='zoom-in'
-					data-aos-delay='400'
-				>
-					<div className='card-body text-center'>
-						<h3 className='text-lg font-semibold text-primary'>Total Tasks</h3>
-						<p className='text-2xl font-bold'>{stats.total}</p>
-					</div>
-				</div>
-			</div>
-
-			{/* Recent Tasks */}
-			<div
-				className='card bg-base-100 shadow-lg'
-				data-aos='fade-up'
-				data-aos-delay='500'
-			>
-				<div className='card-body'>
-					<h3 className='text-xl font-semibold text-primary mb-4'>Recent Tasks</h3>
+			<Card>
+				<CardHeader className='flex flex-row items-center justify-between'>
+					<CardTitle>Recent Tasks</CardTitle>
+					<Button asChild size='sm' variant='ghost'>
+						<Link to='/dashboard/my-tasks' className='gap-1'>
+							View all <ArrowUpRight className='size-4' />
+						</Link>
+					</Button>
+				</CardHeader>
+				<CardContent className='pt-0'>
 					{tasks.length === 0 ? (
-						<p className='text-center text-base-content'>No tasks posted yet.</p>
-					) : (
-						<div className='overflow-x-auto'>
-							<table className='table table-zebra w-full text-sm'>
-								<thead className='bg-base-300 text-base-content'>
-									<tr>
-										<th>#</th>
-										<th>Title</th>
-										<th>Category</th>
-										<th>
-											<FaClock className='inline mr-1' /> Deadline
-										</th>
-										<th>
-											<FaDollarSign className='inline mr-1' /> Budget
-										</th>
-										<th>Actions</th>
-									</tr>
-								</thead>
-								<tbody>
-									{tasks.slice(0, 5).map((task, idx) => (
-										<tr key={task._id}>
-											<td>{idx + 1}</td>
-											<td className='font-semibold'>{task.title}</td>
-											<td>{task.category}</td>
-											<td>{new Date(task.deadline).toLocaleDateString()}</td>
-											<td>${task.budget}</td>
-											<td>
-												<Link
-													to={`/task/${task._id}`}
-													className='btn btn-xs btn-outline btn-primary'
-												>
-													View
-												</Link>
-											</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
+						<div className='py-10 text-center'>
+							<p className='mb-4 text-muted-foreground'>
+								You haven't posted any tasks yet.
+							</p>
+							<Button asChild size='sm'>
+								<Link to='/dashboard/add-task'>Post your first task</Link>
+							</Button>
 						</div>
+					) : (
+						<Table>
+							<TableHeader>
+								<TableRow className='hover:bg-transparent'>
+									<TableHead>#</TableHead>
+									<TableHead>Title</TableHead>
+									<TableHead>Category</TableHead>
+									<TableHead>Deadline</TableHead>
+									<TableHead>Budget</TableHead>
+									<TableHead className='text-right'>Actions</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{tasks.slice(0, 5).map((task, idx) => (
+									<TableRow key={task._id}>
+										<TableCell className='text-muted-foreground'>
+											{idx + 1}
+										</TableCell>
+										<TableCell className='font-semibold'>
+											{task.title}
+										</TableCell>
+										<TableCell>
+											<Badge variant='secondary'>{task.category}</Badge>
+										</TableCell>
+										<TableCell className='text-muted-foreground'>
+											{new Date(task.deadline).toLocaleDateString()}
+										</TableCell>
+										<TableCell className='font-semibold'>
+											${task.budget}
+										</TableCell>
+										<TableCell className='text-right'>
+											<Button asChild size='sm' variant='outline'>
+												<Link to={`/task/${task._id}`}>View</Link>
+											</Button>
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
 					)}
-				</div>
-			</div>
+				</CardContent>
+			</Card>
 		</div>
 	);
 };

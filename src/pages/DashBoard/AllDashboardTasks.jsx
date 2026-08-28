@@ -1,120 +1,158 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useLoaderData } from "react-router";
-import { FaSearch, FaBriefcase, FaClock, FaDollarSign, FaUser, FaFilter } from "react-icons/fa";
+import { Clock, DollarSign, Filter, Search, Inbox } from "lucide-react";
 import SiteTitle from "../../components/SiteTitle";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
+
+const CATEGORIES = [
+	"All",
+	"Web Development",
+	"Design",
+	"Writing",
+	"Marketing",
+	"Data Entry",
+	"Other",
+];
 
 const AllDashboardTasks = () => {
-	const tasks = useLoaderData();
-	const [filtered, setFiltered] = useState([]);
+	const loaderTasks = useLoaderData();
+	const tasks = useMemo(() => loaderTasks || [], [loaderTasks]);
 	const [category, setCategory] = useState("All");
 	const [sortOrder, setSortOrder] = useState("none");
 
-	useEffect(() => {
-		let filteredTasks = [...tasks];
+	const filtered = useMemo(() => {
+		let result = [...tasks];
 		if (category !== "All") {
-			filteredTasks = filteredTasks.filter((task) => task.category === category);
+			result = result.filter((task) => task.category === category);
 		}
-
 		if (sortOrder !== "none") {
-			filteredTasks = [...filteredTasks].sort((a, b) =>
+			result = result.sort((a, b) =>
 				sortOrder === "asc" ? a.budget - b.budget : b.budget - a.budget,
 			);
 		}
-		setFiltered(filteredTasks);
-	}, [category, tasks, sortOrder]);
-
-	const categories = ["All", "Web Development", "Design", "Writing", "Marketing", "Data Entry", "Other"];
+		return result;
+	}, [tasks, category, sortOrder]);
 
 	return (
-		<div className='max-w-7xl mx-auto px-4 my-10 py-6'>
+		<div className='mx-auto max-w-360 px-4 py-6 my-10'>
 			<SiteTitle>All Tasks</SiteTitle>
-			<h2
-				className='text-3xl font-bold text-center text-primary mb-8 flex items-center justify-center gap-2'
-				data-aos='fade-down'
-			>
-				<FaSearch /> All Tasks
-			</h2>
 
-			{/* Filter and Sort Controls */}
-			<div
-				className='flex flex-col sm:flex-row justify-between items-center gap-4 mb-8'
-				data-aos='fade-up'
-			>
-				<div className='flex flex-wrap justify-center gap-3'>
-					{categories.map((cat) => (
-						<button
+			<div className='mb-6'>
+				<h2 className='mb-1 flex items-center gap-2 text-3xl font-bold tracking-tight'>
+					<Search className='size-7 text-primary' /> All Tasks
+				</h2>
+				<p className='text-muted-foreground'>
+					Browse every task posted on the platform.
+				</p>
+			</div>
+
+			<div className='mb-6 flex flex-col items-start justify-between gap-4 rounded-2xl border bg-card p-4 lg:flex-row lg:items-center'>
+				<div className='flex flex-wrap gap-2'>
+					{CATEGORIES.map((cat) => (
+						<Button
 							key={cat}
-							className={`btn btn-sm ${category === cat ? "btn-primary" : "btn-outline"}`}
+							size='sm'
+							variant={category === cat ? "default" : "outline"}
 							onClick={() => setCategory(cat)}
 						>
 							{cat}
-						</button>
+						</Button>
 					))}
 				</div>
 				<div className='flex items-center gap-2'>
-					<label className='text-sm font-medium text-base-content flex items-center gap-1'>
-						<FaFilter className='text-primary' /> Sort by Budget
-					</label>
-					<select
-						className='select select-bordered select-sm'
-						value={sortOrder}
-						onChange={(e) => setSortOrder(e.target.value)}
-					>
-						<option value='none'>No Sort</option>
-						<option value='asc'>Ascending</option>
-						<option value='desc'>Descending</option>
-					</select>
+					<Label className='flex items-center gap-1.5 text-sm font-medium text-muted-foreground'>
+						<Filter className='size-4 text-primary' /> Sort by Budget
+					</Label>
+					<Select value={sortOrder} onValueChange={setSortOrder}>
+						<SelectTrigger className='w-40'>
+							<SelectValue />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value='none'>No Sort</SelectItem>
+							<SelectItem value='asc'>Low to High</SelectItem>
+							<SelectItem value='desc'>High to Low</SelectItem>
+						</SelectContent>
+					</Select>
 				</div>
 			</div>
 
-			{/* Tasks Table */}
-			<div
-				className='overflow-x-auto'
-				data-aos='fade-up'
-				data-aos-delay='100'
-			>
-				{filtered.length > 0 ? (
-					<table className='table table-zebra w-full text-sm shadow shadow-primary'>
-						<thead className='bg-base-300 text-base-content'>
-							<tr>
-								<th>#</th>
-								<th>Title</th>
-								<th>Category</th>
-								<th>Posted By</th>
-								<th>
-									<FaClock className='inline mr-1' /> Deadline
-								</th>
-								<th>
-									<FaDollarSign className='inline mr-1' /> Budget
-								</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							{filtered.map((task, idx) => (
-								<tr key={task._id}>
-									<td>{idx + 1}</td>
-									<td className='font-semibold'>{task.title}</td>
-									<td>{task.category}</td>
-									<td>{task.userName}</td>
-									<td>{new Date(task.deadline).toLocaleDateString()}</td>
-									<td>${task.budget}</td>
-									<td>
-										<Link
-											to={`/task/${task._id}`}
-											className='btn btn-xs btn-outline btn-primary'
-										>
-											Details
-										</Link>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				) : (
-					<p className='text-center text-base-content py-8'>No tasks found in this category.</p>
-				)}
-			</div>
+			<Card>
+				<CardContent className='p-0'>
+					{filtered.length > 0 ? (
+						<Table>
+							<TableHeader>
+								<TableRow className='hover:bg-transparent'>
+									<TableHead>#</TableHead>
+									<TableHead>Title</TableHead>
+									<TableHead>Category</TableHead>
+									<TableHead>Posted By</TableHead>
+									<TableHead>
+										<Clock className='mr-1 inline size-3.5' /> Deadline
+									</TableHead>
+									<TableHead>
+										<DollarSign className='mr-1 inline size-3.5' /> Budget
+									</TableHead>
+									<TableHead className='text-right'>Actions</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{filtered.map((task, idx) => (
+									<TableRow key={task._id}>
+										<TableCell className='text-muted-foreground'>
+											{idx + 1}
+										</TableCell>
+										<TableCell className='font-semibold'>
+											{task.title}
+										</TableCell>
+										<TableCell>
+											<Badge variant='secondary'>{task.category}</Badge>
+										</TableCell>
+										<TableCell className='text-muted-foreground'>
+											{task.userName}
+										</TableCell>
+										<TableCell className='text-muted-foreground'>
+											{new Date(task.deadline).toLocaleDateString()}
+										</TableCell>
+										<TableCell className='font-semibold'>
+											${task.budget}
+										</TableCell>
+										<TableCell className='text-right'>
+											<Button asChild size='sm' variant='outline'>
+												<Link to={`/task/${task._id}`}>Details</Link>
+											</Button>
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					) : (
+						<div className='flex flex-col items-center justify-center gap-2 py-12 text-center'>
+							<Inbox className='size-10 text-muted-foreground/40' />
+							<p className='text-muted-foreground'>
+								No tasks found in this category.
+							</p>
+						</div>
+					)}
+				</CardContent>
+			</Card>
 		</div>
 	);
 };

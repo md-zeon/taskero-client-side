@@ -1,33 +1,34 @@
 import { Link } from "react-router";
 import SiteTitle from "../components/SiteTitle";
-import { FaExclamationTriangle } from "react-icons/fa";
+import { Home, Search, TriangleAlert } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
 	return (
-		<div className='min-h-screen flex items-center justify-center bg-base-100'>
+		<div className='flex min-h-[calc(100vh-12rem)] items-center justify-center bg-background px-4'>
 			<SiteTitle>404 - Page Not Found</SiteTitle>
-			<div
-				className='text-center p-6 max-w-md mx-auto'
-				data-aos='fade-up'
-			>
-				<div className='mb-4 flex justify-center'>
-					<FaExclamationTriangle className='text-6xl text-primary' />
+			<div className='mx-auto max-w-md text-center'>
+				<div className='mb-6 flex justify-center'>
+					<div className='grid size-24 place-items-center rounded-3xl bg-primary/10 text-primary'>
+						<TriangleAlert className='size-12' />
+					</div>
 				</div>
-				<h2 className='text-4xl font-bold mb-4 text-primary'>404 - Page Not Found</h2>
-				<p className='mb-6 text-base-content'>Oops! The page you're looking for doesn't exist or has been moved.</p>
-				<div className='flex gap-4 justify-center'>
-					<Link
-						to='/'
-						className='btn btn-primary'
-					>
-						Go to Home
-					</Link>
-					<Link
-						to='/dashboard'
-						className='btn btn-primary btn-outline'
-					>
-						Go to Dashboard
-					</Link>
+				<p className='mb-2 text-7xl font-extrabold text-muted-foreground/20'>404</p>
+				<h2 className='mb-3 text-3xl font-bold tracking-tight'>Page Not Found</h2>
+				<p className='mb-8 text-muted-foreground'>
+					Oops! The page you're looking for doesn't exist or has been moved.
+				</p>
+				<div className='flex flex-wrap justify-center gap-4'>
+					<Button asChild size='lg'>
+						<Link to='/'>
+							<Home className='size-4' /> Go to Home
+						</Link>
+					</Button>
+					<Button asChild size='lg' variant='outline'>
+						<Link to='/browse-tasks'>
+							<Search className='size-4' /> Browse Tasks
+						</Link>
+					</Button>
 				</div>
 			</div>
 		</div>

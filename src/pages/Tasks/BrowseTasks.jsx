@@ -1,119 +1,172 @@
-import { useEffect, useState } from "react";
-import { Link, useLoaderData, useSearchParams } from "react-router";
-import { FaSearch, FaBriefcase, FaClock, FaDollarSign, FaUser, FaFilter } from "react-icons/fa";
+import { useEffect, useMemo, useState } from "react";
+import { useLoaderData, useSearchParams } from "react-router";
+import { Search, Filter, FolderSearch } from "lucide-react";
 import SiteTitle from "../../components/SiteTitle";
+import TaskCard from "../../components/TaskCard";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+
+const CATEGORIES = [
+	"All",
+	"Web Development",
+	"Design",
+	"Writing",
+	"Marketing",
+	"Data Entry",
+	"Other",
+];
 
 const BrowseTasks = () => {
-	const tasks = useLoaderData();
-	const [filtered, setFiltered] = useState([]);
+	const loaderTasks = useLoaderData();
+	const tasks = useMemo(() => loaderTasks || [], [loaderTasks]);
 	const [searchParams] = useSearchParams();
 	const categoryFromURL = searchParams.get("category");
-	const [category, setCategory] = useState(categoryFromURL || "All");
+
+	const [category, setCategory] = useState(
+		CATEGORIES.includes(categoryFromURL) ? categoryFromURL : "All",
+	);
 	const [sortOrder, setSortOrder] = useState("none");
+	const [search, setSearch] = useState("");
 
 	useEffect(() => {
-		let filteredTasks = [...tasks];
+		if (CATEGORIES.includes(categoryFromURL)) {
+			setCategory(categoryFromURL);
+		}
+	}, [categoryFromURL]);
+
+	const filtered = useMemo(() => {
+		let result = [...tasks];
+
 		if (category !== "All") {
-			filteredTasks = filteredTasks.filter((task) => task.category === category);
+			result = result.filter((task) => task.category === category);
+		}
+
+		if (search.trim()) {
+			const q = search.trim().toLowerCase();
+			result = result.filter(
+				(task) =>
+					task.title?.toLowerCase().includes(q) ||
+					task.description?.toLowerCase().includes(q) ||
+					task.category?.toLowerCase().includes(q),
+			);
 		}
 
 		if (sortOrder !== "none") {
-			filteredTasks = [...filteredTasks].sort((a, b) =>
+			result = result.sort((a, b) =>
 				sortOrder === "asc" ? a.budget - b.budget : b.budget - a.budget,
 			);
 		}
-		setFiltered(filteredTasks);
-	}, [category, tasks, sortOrder]);
 
-	const categories = ["All", "Web Development", "Design", "Writing", "Marketing", "Data Entry", "Other"];
+		return result;
+	}, [tasks, category, sortOrder, search]);
+
+	const categoryCounts = useMemo(() => {
+		const counts = { All: tasks.length };
+		CATEGORIES.filter((c) => c !== "All").forEach((cat) => {
+			counts[cat] = tasks.filter((t) => t.category === cat).length;
+		});
+		return counts;
+	}, [tasks]);
 
 	return (
-		<div className='max-w-7xl mx-auto py-10'>
+		<div className='mx-auto max-w-360 px-4 py-10'>
 			<SiteTitle>Browse Tasks</SiteTitle>
-			<h2
-				className='text-3xl font-bold text-center text-primary mb-8 flex items-center justify-center gap-2'
-				data-aos='fade-down'
-			>
-				<FaSearch /> Browse Freelance Tasks
-			</h2>
 
-			<div
-				className='flex flex-wrap justify-center gap-3 mb-8'
-				data-aos='fade-up'
-			>
-				{categories?.map((cat) => (
-					<button
+			<div className='mb-8 text-center'>
+				<h1 className='mb-3 text-3xl font-bold tracking-tight md:text-4xl'>
+					Browse Freelance Tasks
+				</h1>
+				<p className='mx-auto max-w-xl text-muted-foreground'>
+					Find your next opportunity. Search, filter by category, and sort by
+					budget.
+				</p>
+			</div>
+
+			<div className='relative mx-auto mb-6 max-w-2xl'>
+				<Search className='absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground/60' />
+				<Input
+					type='text'
+					value={search}
+					onChange={(e) => setSearch(e.target.value)}
+					placeholder='Search by title, description or category...'
+					className='pl-9'
+				/>
+			</div>
+
+			<div className='mb-6 flex flex-wrap justify-center gap-2'>
+				{CATEGORIES.map((cat) => (
+					<Button
 						key={cat}
-						className={`btn btn-sm ${category === cat ? "btn-primary" : "btn-outline"}`}
+						size='sm'
+						variant={category === cat ? "default" : "outline"}
 						onClick={() => setCategory(cat)}
 					>
 						{cat}
-					</button>
+						<span className='text-xs opacity-70'> ({categoryCounts[cat] || 0})</span>
+					</Button>
 				))}
 			</div>
 
-			<div className='flex justify-end mb-8 text-primary'>
-				<div></div>
-				<div className='flex gap-2'>
-					<label className='block text-sm font-medium text-gray-700 mb-2'>
-						<FaFilter className='inline text-primary' /> Sort by Budget
-					</label>
-					<select
-						className='select select-bordered'
-						defaultValue={sortOrder}
-						onChange={(e) => setSortOrder(e.target.value)}
-					>
-						<option
-							value='none'
-							disabled={true}
-						>
-							No Sort
-						</option>
-						<option value='asc'>Ascending</option>
-						<option value='desc'>Descending</option>
-					</select>
+			<div className='mb-8 flex flex-col items-center justify-between gap-3 sm:flex-row'>
+				<p className='text-sm text-muted-foreground'>
+					Showing{" "}
+					<span className='font-semibold text-foreground'>
+						{filtered.length}
+					</span>{" "}
+					task{filtered.length !== 1 ? "s" : ""}
+					{category !== "All" ? ` in ${category}` : ""}
+				</p>
+				<div className='flex items-center gap-2'>
+					<Label className='flex items-center gap-1.5 text-sm font-medium text-muted-foreground'>
+						<Filter className='size-4 text-primary' /> Sort by Budget
+					</Label>
+					<Select value={sortOrder} onValueChange={setSortOrder}>
+						<SelectTrigger className='w-40'>
+							<SelectValue placeholder='No Sort' />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value='none'>No Sort</SelectItem>
+							<SelectItem value='asc'>Low to High</SelectItem>
+							<SelectItem value='desc'>High to Low</SelectItem>
+						</SelectContent>
+					</Select>
 				</div>
 			</div>
 
-			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-				{filtered?.length > 0 ? (
-					filtered?.map((task) => (
-						<div
-							key={task._id}
-							className='card bg-base-200 shadow-lg border border-base-300'
-							data-aos='zoom-in'
-						>
-							<div className='card-body'>
-								<h3 className='card-title text-xl font-semibold text-primary'>{task.title}</h3>
-								<p className='text-sm text-gray-500 flex items-center gap-1'>
-									<FaBriefcase /> {task.category}
-								</p>
-								<p className='text-sm text-gray-500 flex items-center gap-1'>
-									<FaUser /> Posted by: {task.userName}
-								</p>
-								<p className='text-sm text-gray-500 flex items-center gap-1'>
-									<FaClock /> Deadline: {new Date(task.deadline).toLocaleDateString()}
-								</p>
-								<p className='text-sm text-gray-600 mt-2'>{task.description.slice(0, 100)}...</p>
-
-								<div className='flex items-center justify-between mt-4'>
-									<span className='flex items-center gap-1 font-bold text-accent'>
-										<FaDollarSign /> {task.budget}
-									</span>
-									<Link
-										to={`/task/${task._id}`}
-										className='btn btn-sm btn-outline btn-primary'
-									>
-										See Details
-									</Link>
-								</div>
-							</div>
-						</div>
-					))
-				) : (
-					<p className='text-center col-span-full text-gray-500'>No tasks found in this category.</p>
-				)}
-			</div>
+			{filtered.length > 0 ? (
+				<div className='grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+					{filtered.map((task, idx) => (
+						<TaskCard key={task._id} task={task} index={idx} />
+					))}
+				</div>
+			) : (
+				<div className='py-16 text-center'>
+					<FolderSearch className='mx-auto mb-4 size-12 text-muted-foreground/30' />
+					<h3 className='mb-2 text-xl font-semibold'>No tasks found</h3>
+					<p className='mx-auto mb-6 max-w-sm text-muted-foreground'>
+						Try adjusting your search or filters, or clear them to browse all
+						tasks.
+					</p>
+					<Button
+						variant='outline'
+						onClick={() => {
+							setSearch("");
+							setCategory("All");
+							setSortOrder("none");
+						}}
+					>
+						Clear All Filters
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 };

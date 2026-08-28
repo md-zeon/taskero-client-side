@@ -19,6 +19,7 @@ import MyDashboardTasks from "../pages/DashBoard/MyDashboardTasks";
 import EditProfile from "../pages/DashBoard/EditProfile";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import { tasksUrl } from "../config/api";
 
 const router = createBrowserRouter([
 	{
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
 			{
 				index: true,
 				Component: Home,
-				loader: () => fetch("https://taskero-server.vercel.app/tasks?limit=8&sort=deadline"),
+				loader: () => fetch(tasksUrl("?limit=8&sort=deadline")),
 				hydrateFallbackElement: <Loader />,
 			},
 			{
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
 			{
 				path: "/browse-tasks",
 				Component: BrowseTasks,
-				loader: () => fetch("https://taskero-server.vercel.app/tasks"),
+				loader: () => fetch(tasksUrl()),
 				hydrateFallbackElement: <Loader />,
 			},
 			{
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
 						<TaskDetails />
 					</PrivateRoute>
 				),
-				loader: ({ params }) => fetch(`https://taskero-server.vercel.app/tasks/${params.id}`),
+				loader: ({ params }) => fetch(tasksUrl(`/${params.id}`)),
 				hydrateFallbackElement: <Loader />,
 			},
 			{
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
 						<EditTask />
 					</PrivateRoute>
 				),
-				loader: ({ params }) => fetch(`https://taskero-server.vercel.app/tasks/${params.id}`),
+				loader: ({ params }) => fetch(tasksUrl(`/${params.id}`)),
 				hydrateFallbackElement: <Loader />,
 			},
 			{
@@ -108,13 +109,13 @@ const router = createBrowserRouter([
 						<Overview />
 					</PrivateRoute>
 				),
-				loader: () => fetch("https://taskero-server.vercel.app/tasks"),
+				loader: () => fetch(tasksUrl()),
 				hydrateFallbackElement: <Loader />,
 			},
 			{
 				path: "all-tasks",
 				element: <AllDashboardTasks />,
-				loader: () => fetch("https://taskero-server.vercel.app/tasks"),
+				loader: () => fetch(tasksUrl()),
 				hydrateFallbackElement: <Loader />,
 			},
 			{
