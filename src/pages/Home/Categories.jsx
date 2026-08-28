@@ -1,36 +1,48 @@
-import { FaCode, FaPaintBrush, FaPenNib, FaBullhorn, FaKeyboard, FaEllipsisH } from "react-icons/fa";
+import {
+	Code2,
+	Palette,
+	PenLine,
+	Megaphone,
+	Keyboard,
+	Ellipsis,
+} from "lucide-react";
 import { Link } from "react-router";
+import SectionHeader from "../../components/SectionHeader";
+import Reveal from "../../components/Reveal";
 
 const categories = [
-	{ name: "Web Development", icon: <FaCode /> },
-	{ name: "Design", icon: <FaPaintBrush /> },
-	{ name: "Writing", icon: <FaPenNib /> },
-	{ name: "Marketing", icon: <FaBullhorn /> },
-	{ name: "Data Entry", icon: <FaKeyboard /> },
-	{ name: "Other", icon: <FaEllipsisH /> },
+	{ name: "Web Development", icon: <Code2 className="size-6" /> },
+	{ name: "Design", icon: <Palette className="size-6" /> },
+	{ name: "Writing", icon: <PenLine className="size-6" /> },
+	{ name: "Marketing", icon: <Megaphone className="size-6" /> },
+	{ name: "Data Entry", icon: <Keyboard className="size-6" /> },
+	{ name: "Other", icon: <Ellipsis className="size-6" /> },
 ];
 
 const Categories = () => {
 	return (
-		<section
-			className='py-12'
-			data-aos='fade-up'
-		>
-			<h2 className='text-3xl font-bold text-center text-primary mb-4'>Explore Categories</h2>
-			<p className='text-center text-gray-600 max-w-2xl mb-12 mx-auto'>
-				Browse all major task categories such as Development, Design, Writing, Marketing, etc by a single click.
-			</p>
+		<section className='py-12'>
+			<SectionHeader
+				eyebrow='Explore'
+				title='Browse by Category'
+				description='Find tasks in the areas that matter most to you with a single click.'
+			/>
 
-			<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 max-w-5xl mx-auto'>
+			<div className='mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6'>
 				{categories.map((cat, idx) => (
-					<Link
-						to={`/browse-tasks?category=${cat.name}`}
-						key={idx}
-						className='flex flex-col items-center p-6 bg-base-200 border border-primary rounded-2xl shadow hover:shadow-lg hover:scale-102 transition-all text-center group'
-					>
-						<div className='text-4xl group-hover:text-primary mb-3'>{cat.icon}</div>
-						<p className='font-semibold text-gray-700 group-hover:text-primary'>{cat.name}</p>
-					</Link>
+					<Reveal key={cat.name} delay={idx * 0.05}>
+						<Link
+							to={`/browse-tasks?category=${cat.name}`}
+							className='group flex flex-col items-center gap-3 rounded-2xl border bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft'
+						>
+							<div className='grid size-14 place-items-center rounded-2xl bg-primary/10 text-2xl text-primary transition-transform duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground'>
+								{cat.icon}
+							</div>
+							<span className='text-center text-sm font-semibold leading-tight text-muted-foreground group-hover:text-foreground'>
+								{cat.name}
+							</span>
+						</Link>
+					</Reveal>
 				))}
 			</div>
 		</section>
