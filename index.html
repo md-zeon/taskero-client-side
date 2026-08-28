@@ -1,10 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Taskero</title>
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f6f1" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1c1a16" />
+    <title>Taskero — Your Task. Their Skill.</title>
+    <meta name="description" content="Taskero is a freelance task marketplace connecting clients with freelancers for small and quick jobs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" />
+    <script>
+      (function () {
+        var stored = localStorage.getItem("taskero-theme");
+        var dark =
+          stored === "dark" ||
+          (!stored && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) document.documentElement.classList.add("dark");
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
