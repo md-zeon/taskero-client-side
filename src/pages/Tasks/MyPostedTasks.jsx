@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { Plus } from "lucide-react";
 import AuthContext from "../../context/AuthContext";
 import Loader from "../../components/Loader";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import TaskActionsTable from "../../components/TaskActionsTable";
 import { tasksUrl } from "../../config/api";
 import { Button } from "@/components/ui/button";
@@ -32,7 +32,9 @@ const MyPostedTasks = () => {
 
 	return (
 		<div className='mx-auto max-w-360 px-4 py-10'>
-			<SiteTitle>My Posted Tasks</SiteTitle>
+			<SEO title='My Posted Tasks'
+				description='View and manage all the freelance tasks you have posted on Taskero.'
+			/>
 
 			<div className='mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center'>
 				<div>

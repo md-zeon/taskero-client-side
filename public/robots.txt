@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taskero-60a20.web.app/sitemap.xml

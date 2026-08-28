@@ -2,7 +2,7 @@ import { use, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AuthContext from "../../context/AuthContext";
 import Loader from "../../components/Loader";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import TaskActionsTable from "../../components/TaskActionsTable";
 import { tasksUrl } from "../../config/api";
 
@@ -29,7 +29,9 @@ const MyDashboardTasks = () => {
 
 	return (
 		<div className='mx-auto max-w-360 px-4 py-10'>
-			<SiteTitle>My Tasks</SiteTitle>
+			<SEO title='My Tasks'
+				description='Manage all the tasks you have posted on your Taskero dashboard.'
+			/>
 
 			<div className='mb-8'>
 				<h2 className='mb-1 text-3xl font-bold tracking-tight'>My Tasks</h2>

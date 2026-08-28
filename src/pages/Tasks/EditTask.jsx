@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Pencil, DollarSign, CalendarDays, User, Mail, ShieldAlert, Loader2 } from "lucide-react";
 import GoBack from "../../components/GoBack";
 import AuthContext from "../../context/AuthContext";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import { tasksUrl } from "../../config/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -105,7 +105,9 @@ const EditTask = () => {
 
 	return (
 		<div className='mx-auto max-w-3xl px-4 py-12'>
-			<SiteTitle>Update Task</SiteTitle>
+			<SEO title='Update Task'
+				description='Update the details of your posted freelance task on Taskero.'
+			/>
 			<GoBack />
 			<Card>
 				<CardHeader className='text-center'>

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useLoaderData } from "react-router";
 import { Clock, DollarSign, Filter, Search, Inbox } from "lucide-react";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -53,7 +53,9 @@ const AllDashboardTasks = () => {
 
 	return (
 		<div className='mx-auto max-w-360 px-4 py-6 my-10'>
-			<SiteTitle>All Tasks</SiteTitle>
+			<SEO title='All Tasks'
+				description='Browse every freelance task posted on Taskero, with search, category filters, and sorting.'
+			/>
 
 			<div className='mb-6'>
 				<h2 className='mb-1 flex items-center gap-2 text-3xl font-bold tracking-tight'>

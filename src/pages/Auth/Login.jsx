@@ -10,7 +10,7 @@ import {
 	TrendingUp,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import AuthContext from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button";
@@ -62,7 +62,9 @@ const Login = () => {
 
 	return (
 		<div className='flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-10'>
-			<SiteTitle>Login</SiteTitle>
+			<SEO title='Login'
+				description='Log in to Taskero to post tasks, manage your listings, and pick up new freelance opportunities.'
+			/>
 			<Reveal>
 				<div className='grid w-full max-w-4xl overflow-hidden rounded-3xl border bg-card shadow-soft md:grid-cols-2'>
 					<div className='hidden flex-col justify-between bg-muted p-10 md:flex'>

@@ -1,12 +1,14 @@
 import { Link } from "react-router";
-import SiteTitle from "../components/SiteTitle";
+import SEO from "../components/SEO";
 import { Home, Search, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
 	return (
 		<div className='flex min-h-[calc(100vh-12rem)] items-center justify-center bg-background px-4'>
-			<SiteTitle>404 - Page Not Found</SiteTitle>
+			<SEO title='404 - Page Not Found'
+				description='The page you are looking for does not exist. Head back to Taskero to browse freelance tasks or post a new one.'
+			/>
 			<div className='mx-auto max-w-md text-center'>
 				<div className='mb-6 flex justify-center'>
 					<div className='grid size-24 place-items-center rounded-3xl bg-primary/10 text-primary'>

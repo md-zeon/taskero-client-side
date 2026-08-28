@@ -3,7 +3,7 @@ import { Briefcase, DollarSign, ClipboardList, UserRound, ArrowUpRight } from "l
 import { Link, useLoaderData } from "react-router";
 import { toast } from "react-toastify";
 import AuthContext from "../../context/AuthContext";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import Loader from "../../components/Loader";
 import DashboardStat from "../../components/DashboardStat";
 import { tasksUrl } from "../../config/api";
@@ -61,7 +61,9 @@ const Overview = () => {
 
 	return (
 		<div className='mx-auto max-w-360 px-4 py-8'>
-			<SiteTitle>Dashboard Overview</SiteTitle>
+			<SEO title='Dashboard Overview'
+				description='Get an overview of your Taskero activity, including recent tasks and profile status.'
+			/>
 
 			<div className='mb-8'>
 				<h2 className='mb-1 text-3xl font-bold tracking-tight'>

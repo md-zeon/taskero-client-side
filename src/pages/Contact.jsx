@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin, User, Send, Loader2 } from "lucide-react";
-import SiteTitle from "../components/SiteTitle";
+import SEO from "../components/SEO";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -41,7 +41,9 @@ const Contact = () => {
 
 	return (
 		<div className='mx-auto max-w-360 px-4 py-12'>
-			<SiteTitle>Contact Us</SiteTitle>
+			<SEO title='Contact Us'
+				description='Get in touch with the Taskero team for support, feedback, or partnership inquiries.'
+			/>
 
 			<div className='mb-14 text-center'>
 				<span className='mb-3 inline-block text-sm font-semibold uppercase tracking-wider text-primary'>

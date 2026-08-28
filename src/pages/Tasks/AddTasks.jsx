@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { ClipboardList, DollarSign, CalendarDays, User, Mail, Loader2 } from "lucide-react";
 import AuthContext from "../../context/AuthContext";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import Reveal from "../../components/Reveal";
 import { tasksUrl } from "../../config/api";
 import { Button } from "@/components/ui/button";
@@ -90,7 +90,9 @@ const AddTask = () => {
 
 	return (
 		<div className='mx-auto max-w-3xl px-4 py-12'>
-			<SiteTitle>Add Task</SiteTitle>
+			<SEO title='Add Task'
+				description='Post a new freelance task on Taskero with a description, category, budget, and deadline.'
+			/>
 			<Reveal>
 				<Card>
 					<CardHeader className='text-center'>

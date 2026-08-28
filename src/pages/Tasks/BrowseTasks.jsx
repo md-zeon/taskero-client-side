@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLoaderData, useSearchParams } from "react-router";
 import { Search, Filter, FolderSearch } from "lucide-react";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import TaskCard from "../../components/TaskCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -78,7 +78,9 @@ const BrowseTasks = () => {
 
 	return (
 		<div className='mx-auto max-w-360 px-4 py-10'>
-			<SiteTitle>Browse Tasks</SiteTitle>
+			<SEO title='Browse Tasks'
+				description='Browse open freelance tasks on Taskero, search by keyword, and filter by category, budget, and deadline.'
+			/>
 
 			<div className='mb-8 text-center'>
 				<h1 className='mb-3 text-3xl font-bold tracking-tight md:text-4xl'>

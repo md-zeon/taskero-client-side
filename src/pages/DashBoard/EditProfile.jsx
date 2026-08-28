@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { User, Mail, Image, Save, Loader2 } from "lucide-react";
 import { toast } from "react-toastify";
 import AuthContext from "../../context/AuthContext";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import GoBack from "../../components/GoBack";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,7 +44,9 @@ const EditProfile = () => {
 
 	return (
 		<div className='mx-auto max-w-md px-4 py-10'>
-			<SiteTitle>Edit Profile</SiteTitle>
+			<SEO title='Edit Profile'
+				description='Update your Taskero profile, display name, and photo.'
+			/>
 			<GoBack />
 
 			<Card>

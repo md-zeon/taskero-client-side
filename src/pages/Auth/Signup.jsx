@@ -10,7 +10,7 @@ import {
 	Globe,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import AuthContext from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button";
@@ -98,7 +98,9 @@ const Signup = () => {
 
 	return (
 		<div className='flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-10'>
-			<SiteTitle>Sign Up</SiteTitle>
+			<SEO title='Sign Up'
+				description='Create your free Taskero account to post tasks or start freelancing and earning today.'
+			/>
 			<Reveal>
 				<div className='grid w-full max-w-4xl overflow-hidden rounded-3xl border bg-card shadow-soft md:grid-cols-2'>
 					<div className='hidden flex-col justify-between bg-muted p-10 md:flex'>

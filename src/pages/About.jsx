@@ -1,6 +1,6 @@
 import { Users, Lightbulb, Handshake, Globe2 } from "lucide-react";
 import { Link } from "react-router";
-import SiteTitle from "../components/SiteTitle";
+import SEO from "../components/SEO";
 import SectionHeader from "../components/SectionHeader";
 import Reveal from "../components/Reveal";
 import { Button } from "@/components/ui/button";
@@ -36,7 +36,9 @@ const features = [
 const About = () => {
 	return (
 		<div className='mx-auto max-w-360 px-4 py-12'>
-			<SiteTitle>About Us</SiteTitle>
+			<SEO title='About Us'
+				description='Learn about Taskero, the freelance task marketplace connecting clients with skilled freelancers for small and quick jobs.'
+			/>
 
 			<div className='mb-16 text-center'>
 				<span className='mb-3 inline-block text-sm font-semibold uppercase tracking-wider text-primary'>

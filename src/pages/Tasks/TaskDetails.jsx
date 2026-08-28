@@ -11,7 +11,7 @@ import {
 	CheckCircle2,
 	Loader2,
 } from "lucide-react";
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import GoBack from "../../components/GoBack";
 import { tasksUrl } from "../../config/api";
 import { Button } from "@/components/ui/button";
@@ -62,7 +62,11 @@ const TaskDetails = () => {
 
 	return (
 		<div className='mx-auto max-w-360 px-4 py-10'>
-			<SiteTitle>{task.title}</SiteTitle>
+			<SEO
+				title={task.title}
+				description={`${task.description || ""} Budget: $${task.budget}. Category: ${task.category}.`}
+				type='article'
+			/>
 
 			<div className='mb-6'>
 				<GoBack />

@@ -1,4 +1,4 @@
-import SiteTitle from "../../components/SiteTitle";
+import SEO from "../../components/SEO";
 import Banner from "./Banner";
 import FeaturedTasks from "./FeaturedTasks";
 import HowItWorks from "./HowItWorks";
@@ -13,7 +13,7 @@ const Home = () => {
 
 	return (
 		<div className='mx-auto max-w-360 space-y-4 px-4'>
-			<SiteTitle>Home</SiteTitle>
+			<SEO />
 			<Banner />
 			<HowItWorks />
 			<FeaturedTasks tasks={featuredTasks} />
