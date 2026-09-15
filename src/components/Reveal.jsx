@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 const Reveal = ({
 	children,
@@ -8,7 +8,13 @@ const Reveal = ({
 	className,
 	as = "div",
 }) => {
+	const shouldReduceMotion = useReducedMotion();
 	const Component = motion[as] || motion.div;
+
+	if (shouldReduceMotion) {
+		return <div className={className}>{children}</div>;
+	}
+
 	return (
 		<Component
 			className={className}
