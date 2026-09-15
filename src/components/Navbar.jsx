@@ -127,7 +127,7 @@ const Navbar = () => {
 
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
-									<button className='ml-1 flex items-center gap-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 cursor-pointer'>
+									<div className='ml-1 flex items-center gap-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 cursor-pointer'>
 										<Avatar className='size-9'>
 											<AvatarImage
 												src={user?.photoURL}
@@ -140,7 +140,7 @@ const Navbar = () => {
 											</AvatarFallback>
 										</Avatar>
 										<ChevronDown className='hidden size-4 text-muted-foreground sm:block' />
-									</button>
+									</div>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align='end' className='w-56'>
 									<DropdownMenuLabel className='flex flex-col gap-0.5'>
