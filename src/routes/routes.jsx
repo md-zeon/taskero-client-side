@@ -112,12 +112,16 @@ const router = createBrowserRouter([
 				loader: () => fetch(tasksUrl()),
 				hydrateFallbackElement: <Loader />,
 			},
-			{
-				path: "all-tasks",
-				element: <AllDashboardTasks />,
-				loader: () => fetch(tasksUrl()),
-				hydrateFallbackElement: <Loader />,
-			},
+		{
+			path: "all-tasks",
+			element: (
+				<PrivateRoute>
+					<AllDashboardTasks />
+				</PrivateRoute>
+			),
+			loader: () => fetch(tasksUrl()),
+			hydrateFallbackElement: <Loader />,
+		},
 			{
 				path: "my-tasks",
 				element: (
