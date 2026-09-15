@@ -178,7 +178,7 @@ const DashBoardLayout = () => {
 						<Menu className='size-5' />
 					</Button>
 				</div>
-				<main className='p-4 lg:p-8'>
+				<main id='main-content' className='p-4 lg:p-8'>
 					{state === "loading" ? <Loader /> : <Outlet />}
 				</main>
 			</div>
