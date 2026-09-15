@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, use } from "react";
 import { useLoaderData, useParams } from "react-router";
 import { toast } from "react-toastify";
 import {
@@ -10,9 +10,11 @@ import {
 	Gavel,
 	CheckCircle2,
 	Loader2,
+	AlertTriangle,
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import GoBack from "../../components/GoBack";
+import AuthContext from "../../context/AuthContext";
 import { tasksUrl } from "../../config/api";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,12 +26,36 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 
 const TaskDetails = () => {
-	const task = useLoaderData();
+	const loadedTask = useLoaderData();
 	const { id } = useParams();
-	const [bids, setBids] = useState(task.bidsCount || 0);
+	const { user } = use(AuthContext);
+	const [bids, setBids] = useState(loadedTask?.bidsCount || 0);
 	const [placing, setPlacing] = useState(false);
+	const [bidPlaced, setBidPlaced] = useState(false);
+
+	if (!loadedTask) {
+		return (
+			<div className='flex min-h-[calc(100vh-10rem)] flex-col items-center justify-center px-4 text-center'>
+				<div className='mb-4 grid size-16 place-items-center rounded-2xl bg-destructive/10 text-destructive'>
+					<AlertTriangle className='size-8' />
+				</div>
+				<h1 className='mb-2 text-2xl font-bold'>Task not found</h1>
+				<p className='mb-6 text-muted-foreground'>
+					The task you're looking for doesn't exist or has been removed.
+				</p>
+				<Button onClick={() => window.history.back()}>Go Back</Button>
+			</div>
+		);
+	}
+
+	const task = loadedTask;
+	const isOwner = user?.email === task.userEmail;
 
 	const handleBid = () => {
+		if (isOwner) {
+			toast.error("You can't bid on your own task.");
+			return;
+		}
 		setPlacing(true);
 		fetch(tasksUrl(`/${id}/bids`), {
 			method: "PATCH",
@@ -41,6 +67,7 @@ const TaskDetails = () => {
 			.then((data) => {
 				if (data.modifiedCount > 0) {
 					setBids(bids + 1);
+					setBidPlaced(true);
 					toast.success("Bid placed successfully!");
 				} else {
 					toast.error("Failed to place bid.");
@@ -129,11 +156,19 @@ const TaskDetails = () => {
 								className='w-full'
 								size='lg'
 								onClick={handleBid}
-								disabled={placing}
+								disabled={placing || bidPlaced || isOwner}
 							>
 								{placing ? (
 									<>
 										<Loader2 className='size-4 animate-spin' /> Placing...
+									</>
+								) : isOwner ? (
+									<>
+										<Gavel className='size-4' /> Your Task
+									</>
+								) : bidPlaced ? (
+									<>
+										<CheckCircle2 className='size-4' /> Bid Placed
 									</>
 								) : (
 									<>
