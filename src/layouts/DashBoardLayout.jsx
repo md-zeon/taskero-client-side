@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { use, useState, useEffect, useRef } from "react";
 import { NavLink, Outlet, useNavigate, useNavigation } from "react-router";
 import {
 	LayoutDashboard,
@@ -22,7 +22,23 @@ const DashBoardLayout = () => {
 	const { user, logout, loading } = use(AuthContext);
 	const { state } = useNavigation();
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+	const sidebarRef = useRef(null);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!isSidebarOpen) return;
+		const handleEscape = (e) => {
+			if (e.key === "Escape") setIsSidebarOpen(false);
+		};
+		document.addEventListener("keydown", handleEscape);
+		return () => document.removeEventListener("keydown", handleEscape);
+	}, [isSidebarOpen]);
+
+	useEffect(() => {
+		if (isSidebarOpen && sidebarRef.current) {
+			sidebarRef.current.focus();
+		}
+	}, [isSidebarOpen]);
 
 	const navItems = [
 		{ to: "/dashboard", label: "Overview", icon: <LayoutDashboard className='size-4' />, end: true, private: true },
@@ -139,12 +155,16 @@ const DashBoardLayout = () => {
 
 			{/* Mobile drawer */}
 			{isSidebarOpen && (
-				<div className='fixed inset-0 z-40 lg:hidden'>
+				<div className='fixed inset-0 z-40 lg:hidden' role='dialog' aria-modal='true' aria-label='Sidebar menu'>
 					<div
 						className='absolute inset-0 bg-black/40 backdrop-blur-sm'
 						onClick={() => setIsSidebarOpen(false)}
 					/>
-					<aside className='absolute inset-y-0 left-0 w-72 border-r bg-background shadow-2xl'>
+					<aside
+						ref={sidebarRef}
+						tabIndex={-1}
+						className='absolute inset-y-0 left-0 w-72 border-r bg-background shadow-2xl outline-none'
+					>
 						{sidebarContent}
 					</aside>
 				</div>
