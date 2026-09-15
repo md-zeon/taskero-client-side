@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Flame } from "lucide-react";
+import { Flame, Inbox } from "lucide-react";
 import TaskCard from "../../components/TaskCard";
 import SectionHeader from "../../components/SectionHeader";
 import Loader from "../../components/Loader";
@@ -9,11 +9,16 @@ import { tasksUrl } from "../../config/api";
 const HighlightedTasks = () => {
 	const [highlightedTasks, setHighlightedTasks] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		fetch(tasksUrl("?limit=4&sort=bidsCount"))
-			.then((res) => res.json())
+			.then((res) => {
+				if (!res.ok) throw new Error("Failed to load tasks");
+				return res.json();
+			})
 			.then((data) => setHighlightedTasks(data))
+			.catch((err) => setError(err.message))
 			.finally(() => setLoading(false));
 	}, []);
 
@@ -31,6 +36,16 @@ const HighlightedTasks = () => {
 
 			{loading ? (
 				<Loader />
+			) : error ? (
+				<div className='flex flex-col items-center justify-center py-12 text-center'>
+					<Inbox className='mb-3 size-10 text-muted-foreground/50' />
+					<p className='text-muted-foreground'>Failed to load highlighted tasks.</p>
+				</div>
+			) : highlightedTasks.length === 0 ? (
+				<div className='flex flex-col items-center justify-center py-12 text-center'>
+					<Inbox className='mb-3 size-10 text-muted-foreground/50' />
+					<p className='text-muted-foreground'>No highlighted tasks available yet.</p>
+				</div>
 			) : (
 				<div className='grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4'>
 					{highlightedTasks.map((task, idx) => (
