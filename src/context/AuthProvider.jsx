@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
 			setLoading(false);
 		});
 		return () => unsubscribe();
-	});
+	}, []);
 
 	const authInfo = {
 		user,
