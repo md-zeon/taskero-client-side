@@ -5,6 +5,7 @@ import { Pencil, DollarSign, CalendarDays, User, Mail, ShieldAlert, Loader2 } fr
 import GoBack from "../../components/GoBack";
 import AuthContext from "../../context/AuthContext";
 import SEO from "../../components/SEO";
+import Loader from "../../components/Loader";
 import { tasksUrl } from "../../config/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,7 +34,7 @@ const EditTask = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const task = useLoaderData();
-	const { user } = use(AuthContext);
+	const { user, loading: authLoading } = use(AuthContext);
 	const [updating, setUpdating] = useState(false);
 
 	const [form, setForm] = useState({
@@ -45,6 +46,8 @@ const EditTask = () => {
 	});
 
 	const setField = (key) => (value) => setForm((f) => ({ ...f, [key]: value }));
+
+	if (authLoading) return <Loader />;
 
 	if (task.userEmail !== user?.email) {
 		return (
