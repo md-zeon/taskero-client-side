@@ -52,7 +52,7 @@ const AddTask = () => {
 			toast.error("Budget Can't be Negative!");
 			return;
 		}
-		if (budget == 0) {
+		if (budget === 0) {
 			toast.error("Budget Can't be Zero!");
 			return;
 		}
